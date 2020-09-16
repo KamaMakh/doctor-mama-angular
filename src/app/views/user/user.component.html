@@ -1,0 +1,119 @@
+<div class="main-panel">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+    <div class="container-fluid">
+      <div class="navbar-wrapper">
+        <a class="navbar-brand">Пользователи</a>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+
+  <div class="content">
+    <div class="row" style="margin-bottom: 20px;">
+      <div class="col-md-3 col-sm-12 col-lg-3">
+        <mat-form-field style="margin-left: 15px;">
+          <mat-label>E-mail</mat-label>
+          <input
+              #inputName
+              [(ngModel)]="filterEmail"
+              matInput maxlength="50"
+              (keyup.enter)="search()"
+          />
+          <button
+            class="clear-icon"
+            *ngIf="inputName.value.trim().length > 0"
+            mat-button matSuffix mat-icon-button aria-label="Clear"
+            (click)="filterEmail = ''"
+          >
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-3 col-sm-12 col-lg-3">
+        <button mat-raised-button
+                class="pull-left"
+                (click)="search()"
+        >
+          <mat-icon>search</mat-icon>
+          Поиск
+        </button>
+
+        <button style="margin-left: 5px;"
+                *ngIf="inputName.value.trim().length > 0"
+                mat-raised-button
+                class="pull-left"
+                aria-label="Clear"
+                (click)="$event.stopPropagation(); filterEmail=''; search()"
+
+        >
+          <mat-icon>clear</mat-icon>
+          Очистить
+        </button>
+      </div>
+
+      <div class="col-md-3 col-sm-12 col-lg-3">
+
+      </div>
+    </div>
+
+    <div class="container-fluid">
+
+      <div class="card">
+        <div class="card-header card-header-warning">
+          <h4 class="card-title">Пользователи</h4>
+
+          <p class="card-category">Всего: {{totalElements}}</p>
+        </div>
+
+        <div *ngIf="items && (items.length > 0)">
+
+          <table mat-table [dataSource]="dataSource" matSort class="table-responsive width100">
+
+            <!-- ID пользователя -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td class="col-id paddings5lr" mat-cell *matCellDef="let item">{{item.id}}</td>
+            </ng-container>
+
+            <!-- Email -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>E-mail</th>
+              <td class="col-email paddings5lr" mat-cell *matCellDef="let item">{{item.email}}</td>
+            </ng-container>
+
+            <!-- Своих детей -->
+            <ng-container matColumnDef="ownChildCount">
+              <th mat-header-cell *matHeaderCellDef>Своих детей</th>
+              <td class="col-ownChildCount paddings5lr" mat-cell *matCellDef="let item">{{item.ownChildCount}}</td>
+            </ng-container>
+
+            <!-- Детей с доступом -->
+            <ng-container matColumnDef="observedChildCount">
+              <th mat-header-cell *matHeaderCellDef>Детей с доступом</th>
+              <td class="col-observedChildCount paddings5lr" mat-cell
+                  *matCellDef="let item">{{item.observedChildCount}}</td>
+            </ng-container>
+
+            <!-- какие поля отображать -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; "></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          </table>
+
+
+          <mat-paginator (page)="pageChanged($event)" [pageIndex]="pageNumber"
+                         [pageSize]="pageSize" [length]="totalElements"
+                         [pageSizeOptions]="[25]" showFirstLastButtons></mat-paginator>
+        </div>
+
+        <div class="item-not-found col-md-12 col-lg-12 col-sm-12 col-xs-12" *ngIf="items && items.length === 0">
+          Пользователи не найдены
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>

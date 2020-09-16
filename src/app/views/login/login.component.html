@@ -1,0 +1,38 @@
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown" style="background-image: url(assets/background.jpg); background-position: right bottom;">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="assets/pizza.svg" height="100px;" style="margin: 10px;" id="icon" alt="Pizza nyam nyam" />
+    </div>
+
+    <!-- Login Form -->
+    <form>
+      <mat-form-field style="width: 85%;">
+        <input matInput placeholder="Ваш логин" name="login"
+               [(ngModel)]="login" required>
+      </mat-form-field>
+
+      <mat-form-field style="width: 85%;">
+        <input matInput placeholder="Ваш пароль" name="password"
+               [(ngModel)]="password" required>
+      </mat-form-field>
+      <button
+        class="btn btn-info btn-lg btn-rounded text-uppercase"
+        type="submit"
+        [disabled]="login && login.trim().length == 0 || password && password.trim().length == 0"
+        (click)="onFormSubmit()"
+      >
+        <div *ngIf="!loading">{{textButton}}</div>
+        <div *ngIf="loading" class="uploader-status">
+          <mat-spinner diameter="20"></mat-spinner>
+        </div>
+      </button>
+    </form>
+
+
+  </div>
+</div>

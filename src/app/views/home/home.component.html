@@ -1,0 +1,105 @@
+<div class="wrapper ">
+  <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+    <!--
+      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+      Tip 2: you can also add an image using data-image tag
+  -->
+    <div class="logo"><a href="" class="simple-text logo-normal">
+      Doctor Mama
+    </a></div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li class="nav-item" style="margin-top: -10px;" [class.active]="currentPage === pageUser">
+          <a class="nav-link pointer" (click)="selectPage(pageUser)">
+            <!--            <i class="material-icons">receipt</i>-->
+            <p>Пользователи</p>
+          </a>
+        </li>
+
+        <li class="nav-item" [class.active]="currentPage === pageChildAvatar">
+          <a class="nav-link pointer" (click)="selectPage(pageChildAvatar)">
+            <!--            <i class="material-icons">list</i>-->
+            <p>Аватарки детей</p>
+          </a>
+        </li>
+
+        <li class="nav-item" [class.active]="currentPage === pageDirectory">
+          <a class="nav-link pointer" (click)="selectPage(pageDirectory)">
+            <!--            <i class="material-icons">bubble_chart</i>-->
+            <p>Справочники</p>
+          </a>
+        </li>
+
+        <li class="nav-item" [class.active]="currentPage === pageWebinar">
+          <a class="nav-link pointer" (click)="selectPage(pageWebinar)">
+            <!--            <i class="material-icons">fastfood</i>-->
+            <p>Вебинары</p>
+          </a>
+        </li>
+
+        <li class="nav-item" [class.active]="currentPage === pageSubscription">
+          <a class="nav-link pointer" (click)="selectPage(pageSubscription)">
+            <!--            <i class="material-icons">group</i>-->
+            <p>Подписки</p>
+          </a>
+        </li>
+
+        <li class="nav-item" [class.active]="currentPage === pageCommercial">
+          <a class="nav-link pointer" (click)="selectPage(pageCommercial)">
+            <!--            <i class="material-icons">attach_money</i>-->
+            <p>Реклама</p>
+          </a>
+        </li>
+
+        <li class="nav-item active-pro ">
+          <a class="nav-item nav-link" style="cursor:pointer" (click)="logout()"><i class="material-icons">unarchive</i>
+            <p>Выйти</p></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <app-user
+    *ngIf="currentPage == pageUser"
+  ></app-user>
+
+  <!--  <app-modificator-->
+  <!--    *ngIf="currentPage == pageModificator"-->
+  <!--    [units]="units"-->
+  <!--  ></app-modificator>-->
+
+  <!--  <app-group-->
+  <!--    *ngIf="currentPage == pageGroup"-->
+  <!--  ></app-group>-->
+
+  <!--  <app-product-->
+  <!--    *ngIf="currentPage == pageProduct"-->
+  <!--    [units]="units"-->
+  <!--  ></app-product>-->
+
+  <!--  <app-settings-->
+  <!--    *ngIf="currentPage == pageSettings"-->
+  <!--  ></app-settings>-->
+
+  <!--  <app-courier-->
+  <!--    *ngIf="currentPage == pageCourier"-->
+  <!--  ></app-courier>-->
+
+  <!--  <app-promo-->
+  <!--    *ngIf="currentPage == pagePromocode"-->
+  <!--  ></app-promo>-->
+
+  <!--  <app-branch-->
+  <!--    *ngIf="currentPage == pageBranch"-->
+  <!--  >-->
+  <!--  </app-branch>-->
+
+  <!--  <app-bonus-->
+  <!--    *ngIf="currentPage == pageBonus"-->
+  <!--  >-->
+  <!--  </app-bonus>-->
+
+</div>
+
+
