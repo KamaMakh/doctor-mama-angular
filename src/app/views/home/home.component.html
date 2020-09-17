@@ -12,6 +12,8 @@
       <ul class="nav">
         <li class="nav-item" style="margin-top: -10px;" [class.active]="currentPage === pageUser">
           <a class="nav-link pointer" (click)="selectPage(pageUser)">
+            <!--             routerLink="/users"-->
+            <!--             routerLinkActive="active">-->
             <!--            <i class="material-icons">receipt</i>-->
             <p>Пользователи</p>
           </a>
@@ -63,6 +65,12 @@
   <app-user
     *ngIf="currentPage == pageUser"
   ></app-user>
+
+  <app-child-avatar
+    *ngIf="currentPage == pageChildAvatar"
+  ></app-child-avatar>
+
+  <!--  <router-outlet></router-outlet>-->
 
   <!--  <app-modificator-->
   <!--    *ngIf="currentPage == pageModificator"-->

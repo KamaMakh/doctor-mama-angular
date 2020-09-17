@@ -1,10 +1,9 @@
 export interface UsersResponse {
-  totalUserCount: number;
+  totalUsersCount: number;
   users?: (UserResponse)[] | null;
 }
 
 export interface UserResponse {
-  userId: number;
   email: string;
   ownChildCount: number;
   observedChildCount: number;

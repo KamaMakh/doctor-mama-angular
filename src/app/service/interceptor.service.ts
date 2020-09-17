@@ -16,29 +16,29 @@ export class InterceptorService implements HttpInterceptor {
   }
 
   intercept(
-    req: HttpRequest<any>,
+    request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const reqUrl = environment.apiBaseUrl;
-    if (!req.url.includes('/api/auth/admin')) {
+    if (!request.url.includes('/api/auth/admin')) {
       this.currentUser = localStorage.getItem('currentUserDoctorMama') ? JSON.parse(localStorage.getItem('currentUserDoctorMama')) : '';
-      req = req.clone({
-        headers: req.headers.set(
+      request = request.clone({
+        headers: request.headers.set(
           'Authorization',
           'Bearer ' + this.currentUser.accessToken
         ),
-        url: reqUrl + '' + req.url,
+        url: reqUrl + '' + request.url,
       });
     } else {
-      req = req.clone({
-        url: reqUrl + '' + req.url,
+      request = request.clone({
+        url: reqUrl + '' + request.url,
       });
     }
-    return next.handle(req).pipe(
+    return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
           this.authenticationService.logout();
-          this.router.navigate(['login'], {queryParams: {returnUrl: req.url}});
+          this.router.navigate(['login'], {queryParams: {returnUrl: request.url}});
         }
         return throwError(err);
       })

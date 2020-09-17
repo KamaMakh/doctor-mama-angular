@@ -46,15 +46,10 @@
                 class="pull-left"
                 aria-label="Clear"
                 (click)="$event.stopPropagation(); filterEmail=''; search()"
-
         >
           <mat-icon>clear</mat-icon>
           Очистить
         </button>
-      </div>
-
-      <div class="col-md-3 col-sm-12 col-lg-3">
-
       </div>
     </div>
 
@@ -70,12 +65,6 @@
         <div *ngIf="items && (items.length > 0)">
 
           <table mat-table [dataSource]="dataSource" matSort class="table-responsive width100">
-
-            <!-- ID пользователя -->
-            <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef>ID</th>
-              <td class="col-id paddings5lr" mat-cell *matCellDef="let item">{{item.id}}</td>
-            </ng-container>
 
             <!-- Email -->
             <ng-container matColumnDef="email">
@@ -96,16 +85,30 @@
                   *matCellDef="let item">{{item.observedChildCount}}</td>
             </ng-container>
 
+            <!-- Оплаты -->
+            <ng-container matColumnDef="payments">
+              <th mat-header-cell *matHeaderCellDef>Оплаты</th>
+              <td class="col-payments paddings5lr" mat-cell *matCellDef="let item">
+                <button mat-icon-button (click)="openEditDialog(item)" class="edit-icon">
+                  <mat-icon aria-hidden="false">payments</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
             <!-- какие поля отображать -->
             <tr mat-header-row *matHeaderRowDef="displayedColumns; "></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
           </table>
 
-
-          <mat-paginator (page)="pageChanged($event)" [pageIndex]="pageNumber"
-                         [pageSize]="pageSize" [length]="totalElements"
-                         [pageSizeOptions]="[25]" showFirstLastButtons></mat-paginator>
+          <mat-paginator
+            (page)="pageChanged($event)"
+            [pageIndex]="pageNumber"
+            [pageSize]="pageSize"
+            [length]="totalElements"
+            [pageSizeOptions]="[25]"
+            showFirstLastButtons>
+          </mat-paginator>
         </div>
 
         <div class="item-not-found col-md-12 col-lg-12 col-sm-12 col-xs-12" *ngIf="items && items.length === 0">

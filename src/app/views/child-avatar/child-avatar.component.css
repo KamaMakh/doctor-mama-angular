@@ -1,19 +1,6 @@
-.col-email {
+.col-avatar {
   width: 50% !important;
 }
-
-.col-ownChildCount {
-  width: 20% !important;
-}
-
-.col-observedChildCount {
-  width: 20% !important;
-}
-
-.col-payments {
-  width: 20% !important;
-}
-
 
 .right-button {
   align-content: flex-end;

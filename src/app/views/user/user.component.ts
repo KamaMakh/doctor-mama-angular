@@ -20,7 +20,7 @@ export class UserComponent extends GeneralTableView<UserResponse> implements OnI
   }
 
   ngOnInit(): void {
-    this.displayedColumns = ['id', 'email', 'ownChildCount', 'observedChildCount'];
+    this.displayedColumns = ['email', 'ownChildCount', 'observedChildCount', 'payments'];
     if (!this.items) {
       this.pageSize = 25;
       this.pageNumber = 0;
@@ -35,7 +35,7 @@ export class UserComponent extends GeneralTableView<UserResponse> implements OnI
   getAllItems() {
     this.userService.findAll(this.pageNumber, this.filterEmail).subscribe(
       data => {
-        this.totalElements = data.totalUserCount;
+        this.totalElements = data.totalUsersCount;
         this.items = data.users;
         this.assignTableSource();
       },

@@ -22,9 +22,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import { FooterComponent } from './views/footer/footer.component';
 import {FooterDatePipe} from './pipe/footer-date.pipe';
+import {getRussianPaginatorIntl} from './translate/PaginatorTranslate';
+import { ChildAvatarComponent } from './views/child-avatar/child-avatar.component';
 
 registerLocaleData(localeRu);
 
@@ -35,7 +37,8 @@ registerLocaleData(localeRu);
     HomeComponent,
     UserComponent,
     FooterDatePipe,
-    FooterComponent
+    FooterComponent,
+    ChildAvatarComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,10 @@ registerLocaleData(localeRu);
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true
+    },
+    {
+      provide: MatPaginatorIntl,
+      useValue: getRussianPaginatorIntl()
     },
     {
       provide: MAT_DATE_LOCALE,
