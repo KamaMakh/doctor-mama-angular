@@ -10,45 +10,55 @@
     </a></div>
     <div class="sidebar-wrapper">
       <ul class="nav">
-        <li class="nav-item" style="margin-top: -10px;" [class.active]="currentPage === pageUser">
-          <a class="nav-link pointer" (click)="selectPage(pageUser)">
-            <!--             routerLink="/users"-->
-            <!--             routerLinkActive="active">-->
+        <li class="nav-item" style="margin-top: -10px;" routerLinkActive="active">
+          <a class="nav-link pointer"
+             routerLink="/users"
+             routerLinkActive="active">
             <!--            <i class="material-icons">receipt</i>-->
             <p>Пользователи</p>
           </a>
         </li>
 
-        <li class="nav-item" [class.active]="currentPage === pageChildAvatar">
-          <a class="nav-link pointer" (click)="selectPage(pageChildAvatar)">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link pointer"
+             routerLink="/avatars"
+             routerLinkActive="active">
             <!--            <i class="material-icons">list</i>-->
             <p>Аватарки детей</p>
           </a>
         </li>
 
-        <li class="nav-item" [class.active]="currentPage === pageDirectory">
-          <a class="nav-link pointer" (click)="selectPage(pageDirectory)">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link pointer"
+             routerLink="/directories"
+             routerLinkActive="active">
             <!--            <i class="material-icons">bubble_chart</i>-->
             <p>Справочники</p>
           </a>
         </li>
 
-        <li class="nav-item" [class.active]="currentPage === pageWebinar">
-          <a class="nav-link pointer" (click)="selectPage(pageWebinar)">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link pointer"
+             routerLink="/webinars"
+             routerLinkActive="active">
             <!--            <i class="material-icons">fastfood</i>-->
             <p>Вебинары</p>
           </a>
         </li>
 
-        <li class="nav-item" [class.active]="currentPage === pageSubscription">
-          <a class="nav-link pointer" (click)="selectPage(pageSubscription)">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link pointer"
+             routerLink="/subscriptions"
+             routerLinkActive="active">
             <!--            <i class="material-icons">group</i>-->
             <p>Подписки</p>
           </a>
         </li>
 
-        <li class="nav-item" [class.active]="currentPage === pageCommercial">
-          <a class="nav-link pointer" (click)="selectPage(pageCommercial)">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link pointer"
+             routerLink="/commercial"
+             routerLinkActive="active">
             <!--            <i class="material-icons">attach_money</i>-->
             <p>Реклама</p>
           </a>
@@ -61,53 +71,7 @@
       </ul>
     </div>
   </div>
-
-  <app-user
-    *ngIf="currentPage == pageUser"
-  ></app-user>
-
-  <app-child-avatar
-    *ngIf="currentPage == pageChildAvatar"
-  ></app-child-avatar>
-
-  <!--  <router-outlet></router-outlet>-->
-
-  <!--  <app-modificator-->
-  <!--    *ngIf="currentPage == pageModificator"-->
-  <!--    [units]="units"-->
-  <!--  ></app-modificator>-->
-
-  <!--  <app-group-->
-  <!--    *ngIf="currentPage == pageGroup"-->
-  <!--  ></app-group>-->
-
-  <!--  <app-product-->
-  <!--    *ngIf="currentPage == pageProduct"-->
-  <!--    [units]="units"-->
-  <!--  ></app-product>-->
-
-  <!--  <app-settings-->
-  <!--    *ngIf="currentPage == pageSettings"-->
-  <!--  ></app-settings>-->
-
-  <!--  <app-courier-->
-  <!--    *ngIf="currentPage == pageCourier"-->
-  <!--  ></app-courier>-->
-
-  <!--  <app-promo-->
-  <!--    *ngIf="currentPage == pagePromocode"-->
-  <!--  ></app-promo>-->
-
-  <!--  <app-branch-->
-  <!--    *ngIf="currentPage == pageBranch"-->
-  <!--  >-->
-  <!--  </app-branch>-->
-
-  <!--  <app-bonus-->
-  <!--    *ngIf="currentPage == pageBonus"-->
-  <!--  >-->
-  <!--  </app-bonus>-->
-
+  <router-outlet></router-outlet>
 </div>
 
 

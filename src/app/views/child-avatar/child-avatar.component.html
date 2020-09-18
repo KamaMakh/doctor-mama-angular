@@ -30,13 +30,13 @@
 
         <div *ngIf="items && (items.length > 0)">
 
-          <table mat-table [dataSource]="dataSource" matSort class="table-responsive width100">
+          <table [dataSource]="dataSource" class="table-responsive width100" mat-table matSort>
 
             <!-- Картинка -->
             <ng-container matColumnDef="avatar">
               <th mat-header-cell *matHeaderCellDef>Аватарка</th>
               <td class="col-avatar paddings5lr" mat-cell *matCellDef="let item">
-                <img class="center-cropped" [src]="getImage(item.path)" alt="childAvatar">
+                <img class="center-cropped" [src]="getImage(item.path)" alt="childAvatar" height="100px">
               </td>
             </ng-container>
 

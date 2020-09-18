@@ -27,6 +27,10 @@ import { FooterComponent } from './views/footer/footer.component';
 import {FooterDatePipe} from './pipe/footer-date.pipe';
 import {getRussianPaginatorIntl} from './translate/PaginatorTranslate';
 import { ChildAvatarComponent } from './views/child-avatar/child-avatar.component';
+import { DirectoryComponent } from './views/directory/directory.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { ActivityTypesComponent } from './views/activity-types/activity-types.component';
+import { SleepingAssociationsComponent } from './views/sleeping-associations/sleeping-associations.component';
 
 registerLocaleData(localeRu);
 
@@ -38,7 +42,10 @@ registerLocaleData(localeRu);
     UserComponent,
     FooterDatePipe,
     FooterComponent,
-    ChildAvatarComponent
+    ChildAvatarComponent,
+    DirectoryComponent,
+    ActivityTypesComponent,
+    SleepingAssociationsComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +62,8 @@ registerLocaleData(localeRu);
     MatButtonModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTabsModule
   ],
   providers: [
     {

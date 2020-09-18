@@ -16,6 +16,6 @@ export class ChildAvatarService implements ChildAvatarDao {
   }
 
   findAll(page: number): Observable<ChildAvatarsResponse> {
-    return this.http.get<ChildAvatarsResponse>('/api/admin/image?page=' + page);
+    return this.http.get<ChildAvatarsResponse>('/api/image?page=' + page);
   }
 }

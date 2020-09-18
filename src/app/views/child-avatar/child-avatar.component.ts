@@ -5,8 +5,6 @@ import {ToastrService} from 'ngx-toastr';
 import {ChildAvatarService} from '../../dao/impl/childavatar/child-avatar.service';
 import {PageEvent} from '@angular/material/paginator';
 import {environment} from '../../../environments/environment.prod';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-child-avatar',
@@ -18,8 +16,7 @@ export class ChildAvatarComponent extends GeneralTableView<ChildAvatarResponse> 
   url = environment.apiBaseUrl;
 
   constructor(private toastr: ToastrService,
-              private childAvatarService: ChildAvatarService,
-              private httpClient: HttpClient) {
+              private childAvatarService: ChildAvatarService) {
     super();
   }
 
@@ -56,8 +53,4 @@ export class ChildAvatarComponent extends GeneralTableView<ChildAvatarResponse> 
     this.pageNumber = pageEvent.pageIndex;
     this.getAllItems();
   }
-
-  //  loadImage(url: string): Observable<any> {
-  //   return this.httpClient.get(url, {responseType: 'blob'}).map(e => URL.createObjectURL(e));
-  // }
 }
