@@ -31,6 +31,7 @@ import { DirectoryComponent } from './views/directory/directory.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ActivityTypesComponent } from './views/activity-types/activity-types.component';
 import { SleepingAssociationsComponent } from './views/sleeping-associations/sleeping-associations.component';
+import { ChildAvatarDialogComponent } from './dialog/child-avatar-dialog/child-avatar-dialog.component';
 
 registerLocaleData(localeRu);
 
@@ -45,7 +46,8 @@ registerLocaleData(localeRu);
     ChildAvatarComponent,
     DirectoryComponent,
     ActivityTypesComponent,
-    SleepingAssociationsComponent
+    SleepingAssociationsComponent,
+    ChildAvatarDialogComponent
   ],
   imports: [
     BrowserModule,
