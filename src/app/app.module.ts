@@ -82,7 +82,11 @@ registerLocaleData(localeRu);
       useValue: 'ru-RU'
     }
   ],
+  entryComponents: [
+    ChildAvatarDialogComponent
+  ],
   bootstrap: [AppComponent]
+
 })
 export class AppModule {
 }
