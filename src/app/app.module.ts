@@ -35,6 +35,8 @@ import { ChildAvatarDialogComponent } from './dialog/child-avatar-dialog/child-a
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
+import { CommercialComponent } from './views/commercial/commercial.component';
+import {ImageCropperModule} from "ngx-image-cropper";
 
 registerLocaleData(localeRu);
 
@@ -51,7 +53,8 @@ registerLocaleData(localeRu);
     ActivityTypesComponent,
     SleepingAssociationsComponent,
     ChildAvatarDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    CommercialComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +74,7 @@ registerLocaleData(localeRu);
     MatSortModule,
     MatPaginatorModule,
     MatTabsModule,
-    MatDialogModule,
+    MatDialogModule
   ],
   providers: [
     {
