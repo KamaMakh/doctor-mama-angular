@@ -32,6 +32,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { ActivityTypesComponent } from './views/activity-types/activity-types.component';
 import { SleepingAssociationsComponent } from './views/sleeping-associations/sleeping-associations.component';
 import { ChildAvatarDialogComponent } from './dialog/child-avatar-dialog/child-avatar-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 registerLocaleData(localeRu);
 
@@ -65,7 +66,8 @@ registerLocaleData(localeRu);
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule,
   ],
   providers: [
     {

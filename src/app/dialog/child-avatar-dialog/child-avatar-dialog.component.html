@@ -1,1 +1,59 @@
-<p>child-avatar-dialog works!</p>
+<form [formGroup]="form">
+
+  <input hidden="true" type="file" accept="image/jpg, image/jpeg, image/png" id="file-input1"
+         (change)="uploadFile($event)">
+  <label for="file-input1">
+    <a *ngIf="(images && ((images.length==0) || (images.length==1))) && (productPhotosNow && productPhotosNow.length<2)"
+       mat-stroked-button color="primary"><i class="material-icons">file_upload</i>
+      Загрузить фото
+    </a>
+  </label>
+
+</form>
+
+
+<!--создание/редактирование категории-->
+
+
+<mat-dialog-content>
+  <p mat-dialog-title>{{dialogTitle}}</p>
+
+  <form [formGroup]="form">
+
+    <input hidden="true" type="file" accept="image/jpg, image/jpeg, image/png" id="file-input1"
+           (change)="uploadFile($event)">
+    <label for="file-input1">
+      <a mat-stroked-button color="primary"><i class="material-icons">file_upload</i>
+        Загрузить фото
+      </a>
+    </label>
+
+  </form>
+
+</mat-dialog-content>
+
+
+<!--  кнопки возможных действий-->
+<section>
+  <div>
+
+    <button
+      mat-raised-button color="primary"
+      (click)="confirm()"
+      class="pull-left"
+    >
+      Сохранить
+    </button>
+
+
+    <button mat-raised-button
+            (click)="cancel()"
+            class="pull-right"
+    >Отмена</button>
+
+  </div>
+</section>
+
+
+
+

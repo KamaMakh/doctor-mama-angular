@@ -5,6 +5,8 @@ import {ToastrService} from 'ngx-toastr';
 import {ChildAvatarService} from '../../dao/impl/childavatar/child-avatar.service';
 import {PageEvent} from '@angular/material/paginator';
 import {environment} from '../../../environments/environment.prod';
+import {MatDialog} from "@angular/material/dialog";
+import {ChildAvatarDialogComponent} from "../../dialog/child-avatar-dialog/child-avatar-dialog.component";
 
 @Component({
   selector: 'app-child-avatar',
@@ -16,7 +18,8 @@ export class ChildAvatarComponent extends GeneralTableView<ChildAvatarResponse> 
   url = environment.apiBaseUrl;
 
   constructor(private toastr: ToastrService,
-              private childAvatarService: ChildAvatarService) {
+              private childAvatarService: ChildAvatarService,
+              private dialog: MatDialog,) {
     super();
   }
 
@@ -33,8 +36,21 @@ export class ChildAvatarComponent extends GeneralTableView<ChildAvatarResponse> 
     }
   }
 
-  assignTableSource() {
-    return super.assignTableSource();
+  addItem() {
+    const dialogRef = this.dialog.open(ChildAvatarDialogComponent, {
+      data: ['Добавление аватарки пользователя'], width: '500px',
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (!(result)) { // если просто закрыли окно, ничего не нажав
+        return;
+      }
+      // if (result.action === DialogAction.SAVE) { // нажали сохранить (обрабатывает как добавление, так и удаление)
+      //   this.pageNumber = 0;
+      //   this.save(result.obj as BranchRequest);
+      //   return;
+      // }
+    });
   }
 
   getAllItems() {
