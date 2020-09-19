@@ -9,6 +9,7 @@ import {DirectoryComponent} from './views/directory/directory.component';
 import {ActivityTypesComponent} from './views/activity-types/activity-types.component';
 import {SleepingAssociationsComponent} from './views/sleeping-associations/sleeping-associations.component';
 import {SleepDurationComponent} from './views/sleep-duration/sleep-duration.component';
+import {CommercialComponent} from "./views/commercial/commercial.component";
 
 const directoriesRoutes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'avatars',
         component: ChildAvatarComponent
+      },
+      {
+        path: 'commercial',
+        component: CommercialComponent
       },
       {path: '', redirectTo: '/users', pathMatch: 'full'},
       {

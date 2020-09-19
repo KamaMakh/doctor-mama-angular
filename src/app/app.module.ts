@@ -41,6 +41,10 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {MatListModule} from '@angular/material/list';
+import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
+import { CommercialComponent } from './views/commercial/commercial.component';
+// import {ImageCropperModule} from 'ngx-image-cropper';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 registerLocaleData(localeRu);
 
@@ -58,7 +62,9 @@ registerLocaleData(localeRu);
     SleepingAssociationsComponent,
     ChildAvatarDialogComponent,
     SleepDurationComponent,
-    ChartFilterDialogComponent
+    ChartFilterDialogComponent,
+    ConfirmDialogComponent,
+    CommercialComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +89,8 @@ registerLocaleData(localeRu);
     MatCardModule,
     MatButtonToggleModule,
     MatSelectModule,
-    MatListModule
+    MatListModule,
+    MatSlideToggleModule
   ],
   providers: [
     {
@@ -102,7 +109,9 @@ registerLocaleData(localeRu);
   ],
   entryComponents: [
     ChildAvatarDialogComponent,
-    ChartFilterDialogComponent
+    ChartFilterDialogComponent,
+    ChildAvatarDialogComponent,
+    ConfirmDialogComponent
   ],
   bootstrap: [AppComponent]
 

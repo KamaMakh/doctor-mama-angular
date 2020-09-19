@@ -40,6 +40,19 @@
               </td>
             </ng-container>
 
+            <!--         действия  -->
+            <ng-container matColumnDef="operations">
+              <th mat-header-cell *matHeaderCellDef>Удаление</th>
+              <td class="col-operations paddings5lr" mat-cell *matCellDef="let item">
+                <button mat-icon-button (click)="openDeleteDialog(item)"
+                        class="edit-icon"
+                >
+                  <mat-icon aria-hidden="false">delete</mat-icon>
+                </button>
+
+              </td>
+            </ng-container>
+
             <!--            какие поля отображать-->
             <tr mat-header-row *matHeaderRowDef="displayedColumns; "></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

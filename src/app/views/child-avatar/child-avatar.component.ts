@@ -5,9 +5,10 @@ import {ToastrService} from 'ngx-toastr';
 import {ChildAvatarService} from '../../dao/impl/childavatar/child-avatar.service';
 import {PageEvent} from '@angular/material/paginator';
 import {environment} from '../../../environments/environment.prod';
-import {MatDialog} from '@angular/material/dialog';
-import {ChildAvatarDialogComponent} from '../../dialog/child-avatar-dialog/child-avatar-dialog.component';
-import {DialogAction} from '../../object/DialogResult';
+import {MatDialog} from "@angular/material/dialog";
+import {ChildAvatarDialogComponent} from "../../dialog/child-avatar-dialog/child-avatar-dialog.component";
+import {DialogAction} from "../../object/DialogResult";
+import {ConfirmDialogComponent} from "../../dialog/confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-child-avatar',
@@ -20,7 +21,7 @@ export class ChildAvatarComponent extends GeneralTableView<ChildAvatarResponse> 
 
   constructor(private toastr: ToastrService,
               private childAvatarService: ChildAvatarService,
-              private dialog: MatDialog, ) {
+              private dialog: MatDialog,) {
     super();
   }
 
@@ -29,7 +30,7 @@ export class ChildAvatarComponent extends GeneralTableView<ChildAvatarResponse> 
   }
 
   ngOnInit(): void {
-    this.displayedColumns = ['avatar'];
+    this.displayedColumns = ['avatar', 'operations'];
     if (!this.items) {
       this.pageSize = 25;
       this.pageNumber = 0;
@@ -70,4 +71,31 @@ export class ChildAvatarComponent extends GeneralTableView<ChildAvatarResponse> 
     this.pageNumber = pageEvent.pageIndex;
     this.getAllItems();
   }
+
+  openDeleteDialog(obj: ChildAvatarResponse) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '500px',
+      data: {
+        dialogTitle: 'Подтвердите действие',
+        message: `Вы действительно хотите удалить аватар?`
+      },
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!(result)) {
+        return;
+      }
+      if (result.action === DialogAction.OK) {
+        this.childAvatarService.deleteAvatar(obj.id).subscribe(result => {
+          this.toastr.info('Аватар удален', 'Успех');
+          this.getAllItems();
+        }, error1 => {
+          this.toastr.error(error1.message, 'Error')
+        });
+      }
+    });
+  }
+
+
 }

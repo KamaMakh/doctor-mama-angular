@@ -1,0 +1,133 @@
+<div class="main-panel">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+    <div class="container-fluid">
+      <div class="navbar-wrapper">
+        <a class="navbar-brand">Рекламный баннер</a>
+      </div>
+
+    </div>
+  </nav>
+  <!-- End Navbar -->
+  <div class="content">
+
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-header card-header-warning">
+          <h4 class="card-title">Рекламный баннер
+          </h4>
+        </div>
+
+
+        <div class="row" style="margin: 20px;">
+
+          <div class="col-lg-6 col-sm-12 col-md-6 col-xl-6">
+            <mat-form-field>
+              <mat-label>Описание</mat-label>
+              <input
+                #inputDecr
+
+                matInput
+
+                [(ngModel)]="descriptionNow"
+                required
+
+              />
+              <button
+                *ngIf="descriptionNow && descriptionNow.length > 0"
+
+                class="clear-icon"
+                mat-button matSuffix mat-icon-button aria-label="Clear"
+
+                (click)="descriptionNow= ''"
+
+              >
+                <mat-icon>clear</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6 col-sm-12 col-md-6 col-xl-6">
+            <mat-form-field>
+              <mat-label>Ссылка</mat-label>
+              <input
+                #inputLink
+
+                matInput
+
+                [(ngModel)]="linkNow"
+                required
+
+              />
+              <button
+                *ngIf="linkNow && linkNow.length > 0"
+
+                class="clear-icon"
+                mat-button matSuffix mat-icon-button aria-label="Clear"
+
+                (click)="linkNow= ''"
+
+              >
+                <mat-icon>clear</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+
+          <div class="col-12">
+            <div>
+              <mat-slide-toggle id="toggle-isactive"
+                                [(ngModel)]="isOnNow">Активен
+              </mat-slide-toggle>
+            </div>
+          </div>
+
+
+          <div class="col-lg-6 col-sm-12 col-md-6 col-xl-6" *ngIf="pathNow" style="margin-top: 20px;">
+            <label>Текущий баннер:</label>
+            <img id="myImage" style="max-width: 100%;" [src]="getImage(pathNow)" alt="banner">
+          </div>
+
+          <div *ngIf="imageSrc" class="col-lg-6 col-sm-12 col-md-6 col-xl-6" style="margin-top: 20px;">
+            <label>При сохранении баннер будет заменен на:</label>
+            <img *ngIf="imageSrc" style="max-width: 100%;" [src]="imageSrc" alt="Новый баннер"/>
+          </div>
+
+
+          <div class="col-12">
+            <form [formGroup]="form" style="margin-top: 20px;">
+
+              <input hidden="true" type="file" accept="image/jpg, image/jpeg, image/png" id="file-input1"
+                     (change)="uploadFile($event)">
+              <label for="file-input1">
+                <a mat-stroked-button color="primary"><i class="material-icons">file_upload</i>
+                  Заменить баннер
+                </a>
+              </label>
+            </form>
+          </div>
+
+          <div class="col-12">
+            <mat-progress-bar style="margin-top: 20px; margin-bottom: 20px;"
+                              *ngIf="isDownloadImage"
+                              mode="indeterminate"></mat-progress-bar>
+          </div>
+
+          <div class="col-12">
+            <button
+              mat-raised-button color="primary"
+              (click)="confirm()"
+              class="pull-left"
+            >
+              Сохранить
+            </button>
+          </div>
+
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -28,6 +28,6 @@ export class ChildAvatarService implements ChildAvatarDao {
   }
 
   deleteAvatar(id: number): Observable<ChildAvatarResponse[]> {
-    return undefined;
+    return this.http.delete<ChildAvatarResponse[]>('/api/admin/image/' + id);
   }
 }
