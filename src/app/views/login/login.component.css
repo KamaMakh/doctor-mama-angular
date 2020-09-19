@@ -275,7 +275,7 @@ input[type=text]::placeholder {
 }
 
 #icon {
-  width: 60%;
+  width: 30%;
 }
 
 .uploader-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
