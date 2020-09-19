@@ -32,8 +32,15 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { ActivityTypesComponent } from './views/activity-types/activity-types.component';
 import { SleepingAssociationsComponent } from './views/sleeping-associations/sleeping-associations.component';
 import { ChildAvatarDialogComponent } from './dialog/child-avatar-dialog/child-avatar-dialog.component';
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatDialogModule} from '@angular/material/dialog';
+import { SleepDurationComponent } from './views/sleep-duration/sleep-duration.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { ChartsModule } from 'ng2-charts';
+import { ChartFilterDialogComponent } from './dialog/chart-filter-dialog/chart-filter-dialog.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
 
 registerLocaleData(localeRu);
 
@@ -49,7 +56,9 @@ registerLocaleData(localeRu);
     DirectoryComponent,
     ActivityTypesComponent,
     SleepingAssociationsComponent,
-    ChildAvatarDialogComponent
+    ChildAvatarDialogComponent,
+    SleepDurationComponent,
+    ChartFilterDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +79,11 @@ registerLocaleData(localeRu);
     MatPaginatorModule,
     MatTabsModule,
     MatDialogModule,
+    ChartsModule,
+    MatCardModule,
+    MatButtonToggleModule,
+    MatSelectModule,
+    MatListModule
   ],
   providers: [
     {
@@ -87,7 +101,8 @@ registerLocaleData(localeRu);
     }
   ],
   entryComponents: [
-    ChildAvatarDialogComponent
+    ChildAvatarDialogComponent,
+    ChartFilterDialogComponent
   ],
   bootstrap: [AppComponent]
 

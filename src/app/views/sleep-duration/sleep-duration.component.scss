@@ -1,0 +1,46 @@
+.chart-filter {
+  padding: 1rem;
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  &__toggle {
+    .mat-button-toggle {
+      &.mat-button-toggle-checked {
+        background: #513453;
+        color: #fff;
+        .mat-button-toggle-button {
+          &:focus {
+            outline: none !important;
+          }
+          .mat-button-toggle-label-content {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  &__select {
+    max-width: 200px;
+    button {
+      background: #513453;
+      color: #fff;
+    }
+  }
+  &__field {
+    padding: 0 !important;
+    .mat-form-field-wrapper {
+      padding: 0 !important;
+    }
+  }
+}
+.content {
+  max-width: 100%;
+  overflow: auto;
+  .chart-wrapper {
+    background: linear-gradient(135deg, #916BFF 0%, #3366FF 98.38%);
+    position: relative;
+    padding: 20px 0;
+  }
+}

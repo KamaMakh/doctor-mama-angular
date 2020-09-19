@@ -1,0 +1,38 @@
+<mat-dialog-content>
+  <p mat-dialog-title>{{dialogTitle}}</p>
+  <mat-selection-list *ngIf="!loading" #shoes [multiple]="false">
+    <mat-list-option *ngFor="let child of children" [value]="currentChildren" (click)="chooseChild(child)">
+      {{ child.childId }}. {{ child.childName }} - {{ child.userEmail }}
+    </mat-list-option>
+  </mat-selection-list>
+  <mat-paginator
+    *ngIf="!loading"
+    (page)="pageChanged($event)"
+    [pageIndex]="pageNumber"
+    [pageSize]="pageSize"
+    [length]="totalElements"
+    [pageSizeOptions]="[25]"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+  <mat-spinner *ngIf="loading" diameter="30" class="m-x-a m-t-15"></mat-spinner>
+</mat-dialog-content>
+
+
+<!--  кнопки возможных действий-->
+<section>
+  <div>
+    <button
+      mat-raised-button
+      (click)="cancel()"
+      class="pull-right"
+    >
+      Отмена
+    </button>
+
+  </div>
+</section>
+
+
+
+

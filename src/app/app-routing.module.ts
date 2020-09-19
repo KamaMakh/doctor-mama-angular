@@ -8,6 +8,7 @@ import {ChildAvatarComponent} from './views/child-avatar/child-avatar.component'
 import {DirectoryComponent} from './views/directory/directory.component';
 import {ActivityTypesComponent} from './views/activity-types/activity-types.component';
 import {SleepingAssociationsComponent} from './views/sleeping-associations/sleeping-associations.component';
+import {SleepDurationComponent} from './views/sleep-duration/sleep-duration.component';
 
 const directoriesRoutes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
         component: ChildAvatarComponent
       },
       {path: '', redirectTo: '/users', pathMatch: 'full'},
+      {
+        path: 'charts',
+        component: SleepDurationComponent
+      },
       ...directoriesRoutes
     ]
   },

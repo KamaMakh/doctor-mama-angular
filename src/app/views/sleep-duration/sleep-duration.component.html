@@ -1,0 +1,51 @@
+<div class="main-panel">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+    <div class="container-fluid">
+      <div class="navbar-wrapper flex-grow-1">
+        <mat-card class="flex-grow-1 chart-filter">
+          <div class="chart-filter__inner">
+            <mat-button-toggle-group [ngModel]="filter.dayPart" (change)="setDayPart($event)" class="chart-filter__toggle" appearance="legacy">
+              <mat-button-toggle value="DAY">Дневной сон</mat-button-toggle>
+              <mat-button-toggle value="NIGHT">Ночной сон</mat-button-toggle>
+              <mat-button-toggle [value]="null">Общее</mat-button-toggle>
+            </mat-button-toggle-group>
+            <mat-button-toggle-group [ngModel]="interval" class="chart-filter__toggle" appearance="legacy">
+              <mat-button-toggle (click)="chooseInterval('week')" value="week">Неделя</mat-button-toggle>
+              <mat-button-toggle (click)="chooseInterval('month')" value="month">Месяц</mat-button-toggle>
+              <mat-button-toggle (click)="chooseInterval('year')" value="year">Год</mat-button-toggle>
+            </mat-button-toggle-group>
+            <div class="chart-filter__select">
+              <button mat-button mat-raised-button (click)="openDialog()">
+                {{ currentChild && currentChild.childName ? currentChild.childName : 'Выбрать ребенка' }}
+              </button>
+            </div>
+            <button mat-button mat-raised-button [disabled]="!currentChild || !currentChild.childName || loading" (click)="search()">
+              <span *ngIf="!loading">
+                Применить
+              </span>
+              <mat-spinner *ngIf="loading" diameter="30"></mat-spinner>
+            </button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+  <div class="content">
+    <div class="chart-wrapper" #wrapper>
+      <canvas
+        baseChart
+        [datasets]="lineChartData"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins"
+        height="600"
+      >
+      </canvas>
+    </div>
+  </div>
+</div>

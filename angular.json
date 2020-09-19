@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "DoctorMamaAdminka"
+  "defaultProject": "DoctorMamaAdminka",
+  "cli": {
+    "analytics": false
+  }
 }
