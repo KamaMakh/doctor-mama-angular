@@ -14,6 +14,8 @@ export class ChildAvatarDialogComponent implements OnInit {
   dialogTitle: string;
   images: File[] = [];
 
+  imageSrc: string;
+
 
   constructor(  public fb: FormBuilder, private dialogRef: MatDialogRef<ChildAvatarDialogComponent>, // для работы с текущим диалог. окном
                 @Inject(MAT_DIALOG_DATA) private data: [string],
@@ -28,15 +30,18 @@ export class ChildAvatarDialogComponent implements OnInit {
     this.images = [];
     const file = (event.target as HTMLInputElement).files[0];
 
+    const reader = new FileReader();
+    reader.onload = (event:any) => {
+      this.imageSrc = event.target.result;
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
+
     console.log(' file ' + file);
     this.images.push(file);
 
     this.saveImage(this.images);
-
-    this.form.patchValue({
-      avatar: file
-    });
-    this.form.get('avatar').updateValueAndValidity();
+    
   }
 
 
