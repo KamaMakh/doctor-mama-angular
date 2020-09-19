@@ -1,5 +1,9 @@
 .col-avatar {
-  width: 50% !important;
+  width: 95% !important;
+}
+
+.col-operations {
+  width: 5% !important;
 }
 
 .right-button {

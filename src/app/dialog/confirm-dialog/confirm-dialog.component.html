@@ -1,0 +1,23 @@
+<!--диалоговое окно подтверждения действия-->
+
+<h1 mat-dialog-title>
+  {{dialogTitle}}
+</h1>
+
+<div mat-dialog-content>
+  <p>{{message}}</p>
+</div>
+
+<!--  кнопки возможных действий-->
+<section>
+  <div>
+    <button (click)="confirm()"
+            class="pull-left"
+            color="primary"
+            mat-raised-button>ОК</button>
+
+    <button (click)="cancel()"
+            mat-raised-button
+            class="pull-right">Отмена</button>
+  </div>
+</section>

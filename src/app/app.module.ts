@@ -34,6 +34,7 @@ import { SleepingAssociationsComponent } from './views/sleeping-associations/sle
 import { ChildAvatarDialogComponent } from './dialog/child-avatar-dialog/child-avatar-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
 
 registerLocaleData(localeRu);
 
@@ -49,7 +50,8 @@ registerLocaleData(localeRu);
     DirectoryComponent,
     ActivityTypesComponent,
     SleepingAssociationsComponent,
-    ChildAvatarDialogComponent
+    ChildAvatarDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,8 @@ registerLocaleData(localeRu);
     }
   ],
   entryComponents: [
-    ChildAvatarDialogComponent
+    ChildAvatarDialogComponent,
+    ConfirmDialogComponent
   ],
   bootstrap: [AppComponent]
 
