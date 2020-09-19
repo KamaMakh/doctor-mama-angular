@@ -98,10 +98,6 @@ export class CommercialComponent implements OnInit {
 
   confirm() {
     this.isDownloadImage = true;
-    if (this.images.length === 0) {
-      this.images.push(this.currentImage);
-      console.log('this.images ' + this.images.length);
-    }
     this.commercialService.updateBanner(this.images, this.linkNow, this.descriptionNow, this.isOnNow).subscribe(result => {
       this.isDownloadImage = false;
       this.imageSrc = null;
