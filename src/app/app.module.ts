@@ -33,6 +33,7 @@ import { ActivityTypesComponent } from './views/activity-types/activity-types.co
 import { SleepingAssociationsComponent } from './views/sleeping-associations/sleeping-associations.component';
 import { ChildAvatarDialogComponent } from './dialog/child-avatar-dialog/child-avatar-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 registerLocaleData(localeRu);
 
@@ -63,6 +64,7 @@ registerLocaleData(localeRu);
     ToastrModule.forRoot(),
     MatIconModule,
     MatButtonModule,
+    MatProgressBarModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,

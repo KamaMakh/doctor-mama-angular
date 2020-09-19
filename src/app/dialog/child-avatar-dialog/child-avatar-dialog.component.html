@@ -3,7 +3,7 @@
 
   <img class="center-img" *ngIf="imageSrc" width="200px;" [src]="imageSrc" alt="Загружаемая аватарка" />
 
-  <form  [formGroup]="form" style="margin-top: 20px;">
+  <form *ngIf="!isDownloadImage" [formGroup]="form" style="margin-top: 20px;">
 
     <input hidden="true" type="file" accept="image/jpg, image/jpeg, image/png" id="file-input1"
            (change)="uploadFile($event)">
@@ -15,11 +15,14 @@
 
   </form>
 
+  <mat-progress-bar style="margin-bottom: 20px; margin-top: 20px;" *ngIf="isDownloadImage"
+                    mode="indeterminate"></mat-progress-bar>
+
 </mat-dialog-content>
 
 
 <!--  кнопки возможных действий-->
-<section>
+<section *ngIf="!isDownloadImage">
   <div>
 
     <button

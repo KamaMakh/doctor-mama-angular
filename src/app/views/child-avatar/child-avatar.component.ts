@@ -7,6 +7,7 @@ import {PageEvent} from '@angular/material/paginator';
 import {environment} from '../../../environments/environment.prod';
 import {MatDialog} from "@angular/material/dialog";
 import {ChildAvatarDialogComponent} from "../../dialog/child-avatar-dialog/child-avatar-dialog.component";
+import {DialogAction} from "../../object/DialogResult";
 
 @Component({
   selector: 'app-child-avatar',
@@ -45,11 +46,11 @@ export class ChildAvatarComponent extends GeneralTableView<ChildAvatarResponse> 
       if (!(result)) { // если просто закрыли окно, ничего не нажав
         return;
       }
-      // if (result.action === DialogAction.SAVE) { // нажали сохранить (обрабатывает как добавление, так и удаление)
-      //   this.pageNumber = 0;
-      //   this.save(result.obj as BranchRequest);
-      //   return;
-      // }
+      if (result.action === DialogAction.OK) { // нажали сохранить (обрабатывает как добавление, так и удаление)
+        this.toastr.info('Добавлена новая аватарка', 'Успех');
+        this.getAllItems();
+        return;
+      }
     });
   }
 

@@ -3,4 +3,6 @@ import {ChildAvatarResponse, ChildAvatarsResponse} from '../../../model/childava
 
 export interface ChildAvatarDao {
   findAll(page: number): Observable<ChildAvatarsResponse>;
+  addAvatar(photo: any[]): Observable<ChildAvatarResponse[]>;
+  deleteAvatar(id: number): Observable<ChildAvatarResponse[]>;
 }
