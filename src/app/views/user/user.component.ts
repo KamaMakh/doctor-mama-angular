@@ -4,6 +4,10 @@ import {UserResponse} from '../../model/user/UserResponse';
 import {UserService} from '../../dao/impl/user/user.service';
 import {ToastrService} from 'ngx-toastr';
 import {PageEvent} from '@angular/material/paginator';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogAction} from '../../object/DialogResult';
+import {Children} from '../../model/children/Children';
+import {EditUserDialogComponent} from '../../dialog/edit-user-dialog/edit-user-dialog.component';
 
 @Component({
   selector: 'app-user',
@@ -14,18 +18,40 @@ export class UserComponent extends GeneralTableView<UserResponse> implements OnI
 
   filterEmail: string;
 
-  constructor(private toastr: ToastrService,
-              private userService: UserService) {
+  constructor(
+    private toastr: ToastrService,
+    private userService: UserService,
+    private dialog: MatDialog,
+  ) {
     super();
   }
 
   ngOnInit(): void {
-    this.displayedColumns = ['email', 'ownChildCount', 'observedChildCount', 'payments'];
+    this.displayedColumns = ['email', 'ownChildCount', 'observedChildCount', 'payments', 'actions'];
     if (!this.items) {
       this.pageSize = 25;
       this.pageNumber = 0;
       this.getAllItems();
     }
+  }
+
+  openDialog(user: UserResponse): void {
+    const dialogRef = this.dialog.open(EditUserDialogComponent, {
+      data: {
+        title: 'Смена пароля',
+        user
+      },
+      width: '500px',
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!(result)) { // если просто закрыли окно, ничего не нажав
+        return;
+      }
+      if (result.action === DialogAction.OK) { // нажали сохранить (обрабатывает как добавление, так и удаление)
+        return;
+      }
+    });
   }
 
   assignTableSource() {

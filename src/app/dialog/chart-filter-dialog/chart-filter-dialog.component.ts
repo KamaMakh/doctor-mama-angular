@@ -37,12 +37,13 @@ export class ChartFilterDialogComponent implements OnInit {
   getAllChildren() {
     this.loading = true;
     this.childrenService.findAll(this.pageNumber).subscribe(
-      response => {
+response => {
         console.log(response);
         this.children = response.children;
         this.totalElements = response.totalChildCount;
         this.loading = false;
-      }, error1 => {
+      },
+error1 => {
         this.toastr.error(error1.message, 'Error');
       }
     );

@@ -89,8 +89,18 @@
             <ng-container matColumnDef="payments">
               <th mat-header-cell *matHeaderCellDef>Оплаты</th>
               <td class="col-payments paddings5lr" mat-cell *matCellDef="let item">
-                <button mat-icon-button (click)="openEditDialog(item)" class="edit-icon">
+                <button mat-icon-button class="edit-icon">
                   <mat-icon aria-hidden="false">payments</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <!-- Действия -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Действия</th>
+              <td class="col-payments paddings5lr" mat-cell *matCellDef="let item">
+                <button mat-icon-button (click)="openDialog(item)" class="pencil-icon">
+                  <mat-icon aria-hidden="false">edit</mat-icon>
                 </button>
               </td>
             </ng-container>

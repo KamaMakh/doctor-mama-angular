@@ -45,6 +45,7 @@ import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.c
 import { CommercialComponent } from './views/commercial/commercial.component';
 // import {ImageCropperModule} from 'ngx-image-cropper';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { EditUserDialogComponent } from './dialog/edit-user-dialog/edit-user-dialog.component';
 
 registerLocaleData(localeRu);
 
@@ -64,7 +65,8 @@ registerLocaleData(localeRu);
     SleepDurationComponent,
     ChartFilterDialogComponent,
     ConfirmDialogComponent,
-    CommercialComponent
+    CommercialComponent,
+    EditUserDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -111,7 +113,8 @@ registerLocaleData(localeRu);
     ChildAvatarDialogComponent,
     ChartFilterDialogComponent,
     ChildAvatarDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    EditUserDialogComponent
   ],
   bootstrap: [AppComponent]
 

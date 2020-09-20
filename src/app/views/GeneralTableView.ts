@@ -1,5 +1,6 @@
 import {MatTableDataSource} from '@angular/material/table';
 import {PageEvent} from '@angular/material/paginator';
+import {UserResponse} from '../model/user/UserResponse';
 
 export abstract class GeneralTableView<T> {
 
@@ -31,6 +32,6 @@ export abstract class GeneralTableView<T> {
   pageChanged(pageEvent: PageEvent) {
   }
 
-  openEditDialog(cat: T) {
+  openEditDialog(user: UserResponse) {
   }
 }

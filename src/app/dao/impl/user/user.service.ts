@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {UserDao} from '../../interface/user/UserDao';
 import {Observable} from 'rxjs';
-import {UsersResponse} from '../../../model/user/UserResponse';
+import {UserResponseAfterUpdate, UsersResponse} from '../../../model/user/UserResponse';
 import {environment} from '../../../../environments/environment.prod';
 import {HttpClient} from '@angular/common/http';
+import {SleepDurationResponse} from '../../../model/charts/SleepDuration';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,12 @@ export class UserService implements UserDao {
       eMail = '&email=' + email;
     }
     return this.http.get<UsersResponse>('/api/admin/user?page=' + page + eMail);
+  }
+
+  updatePassword(id: number, newPassword: string): Observable<UserResponseAfterUpdate> {
+    return this.http.post<UserResponseAfterUpdate>(`/api/admin/user/${id}/password?id=${id}&newPassword=${newPassword}`, {
+      id,
+      newPassword
+    });
   }
 }
