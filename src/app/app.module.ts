@@ -47,6 +47,7 @@ import { CommercialComponent } from './views/commercial/commercial.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { EditUserDialogComponent } from './dialog/edit-user-dialog/edit-user-dialog.component';
 import {DeleteUserDialogComponent} from './dialog/delete-user-dialog/delete-user-dialog.component';
+import { ChildrenComponent } from './views/children/children.component';
 
 registerLocaleData(localeRu);
 
@@ -68,7 +69,8 @@ registerLocaleData(localeRu);
     ConfirmDialogComponent,
     CommercialComponent,
     EditUserDialogComponent,
-    DeleteUserDialogComponent
+    DeleteUserDialogComponent,
+    ChildrenComponent
   ],
   imports: [
     BrowserModule,

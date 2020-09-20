@@ -32,6 +32,6 @@ export abstract class GeneralTableView<T> {
   pageChanged(pageEvent: PageEvent) {
   }
 
-  openEditDialog(user: UserResponse) {
-  }
+  // openEditDialog(user: UserResponse) {
+  // }
 }

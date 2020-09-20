@@ -8,6 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {DialogAction} from '../../object/DialogResult';
 import {EditUserDialogComponent} from '../../dialog/edit-user-dialog/edit-user-dialog.component';
 import {DeleteUserDialogComponent} from '../../dialog/delete-user-dialog/delete-user-dialog.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -22,6 +23,7 @@ export class UserComponent extends GeneralTableView<UserResponse> implements OnI
     private toastr: ToastrService,
     private userService: UserService,
     private dialog: MatDialog,
+    private router: Router,
   ) {
     super();
   }
@@ -80,6 +82,10 @@ export class UserComponent extends GeneralTableView<UserResponse> implements OnI
         return;
       }
     });
+  }
+
+  openChildren(user: UserResponse): void {
+    this.router.navigate([`users/${user.id}/children`]);
   }
 
   assignTableSource() {

@@ -10,6 +10,7 @@ import {ActivityTypesComponent} from './views/activity-types/activity-types.comp
 import {SleepingAssociationsComponent} from './views/sleeping-associations/sleeping-associations.component';
 import {SleepDurationComponent} from './views/sleep-duration/sleep-duration.component';
 import {CommercialComponent} from "./views/commercial/commercial.component";
+import {ChildrenComponent} from './views/children/children.component';
 
 const directoriesRoutes: Routes = [
   {
@@ -26,16 +27,23 @@ const directoriesRoutes: Routes = [
   }
 ];
 
+const usersRoutes: Routes = [
+  {
+    path: 'users',
+    component: UserComponent
+  },
+  {
+    path: 'users/:id/children',
+    component: ChildrenComponent
+  }
+];
+
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     canActivate: [AuthGuardService],
     children: [
-      {
-        path: 'users',
-        component: UserComponent
-      },
       {
         path: 'avatars',
         component: ChildAvatarComponent
@@ -49,7 +57,8 @@ const routes: Routes = [
         path: 'charts',
         component: SleepDurationComponent
       },
-      ...directoriesRoutes
+      ...directoriesRoutes,
+      ...usersRoutes
     ]
   },
   {

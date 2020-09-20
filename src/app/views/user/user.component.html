@@ -75,7 +75,12 @@
             <!-- Своих детей -->
             <ng-container matColumnDef="ownChildCount">
               <th mat-header-cell *matHeaderCellDef>Своих детей</th>
-              <td class="col-ownChildCount paddings5lr" mat-cell *matCellDef="let item">{{item.ownChildCount}}</td>
+              <td class="col-ownChildCount paddings5lr" mat-cell *matCellDef="let item">
+                <button mat-raised-button style="background: #9c27b0; color: white;" (click)="openChildren(item)">
+                  <mat-icon aria-hidden="false">remove_red_eye</mat-icon>
+                  {{item.ownChildCount}}
+                </button>
+              </td>
             </ng-container>
 
             <!-- Детей с доступом -->

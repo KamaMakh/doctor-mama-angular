@@ -14,4 +14,7 @@ export class ChildrenService implements ChildrenDao{
   findAll(page: number): Observable<ChildrenResponse> {
     return this.http.get<ChildrenResponse>('/api/admin/child?page=' + page);
   }
+  findByUser(page: number, userId: number): Observable<ChildrenResponse> {
+    return this.http.get<ChildrenResponse>(`/api/admin/child/user?page=${page}&userId=${userId}`);
+  }
 }
