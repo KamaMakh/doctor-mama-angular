@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {UserService} from '../../dao/impl/user/user.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -15,13 +15,15 @@ import {PageEvent} from '@angular/material/paginator';
 })
 export class ChildrenComponent extends GeneralTableView<Children> implements OnInit {
   loading = true;
+  showDeleted = false;
   userId: number;
+  allItems: Children[];
   constructor(
     private toastr: ToastrService,
     private userService: UserService,
     private dialog: MatDialog,
     private route: ActivatedRoute,
-    private router: Router,
+    public router: Router,
     private childrenService: ChildrenService
   ) {
     super();
@@ -41,7 +43,8 @@ export class ChildrenComponent extends GeneralTableView<Children> implements OnI
     this.loading = true;
     this.childrenService.findByUser(this.pageNumber, this.userId).subscribe(
       response => {
-        this.items = response.children;
+        this.items = this.filterRows( this.showDeleted, response.children);
+        this.allItems = response.children;
         this.totalElements = response.totalChildCount;
         this.loading = false;
         this.assignTableSource();
@@ -57,6 +60,36 @@ export class ChildrenComponent extends GeneralTableView<Children> implements OnI
   }
   openChart(child: Children): void {
     this.router.navigate([`charts/${child.childId}`]);
+  }
+
+  filterRows(showDeleted: boolean, rows: Children[]) {
+    if (showDeleted) {
+      return rows.sort((a, b) => {
+        if (a.childStatus === 'active') {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
+    } else {
+      return rows.filter(child => {
+        return child.childStatus === 'active';
+      });
+    }
+  }
+
+  toggleRows(val: boolean) {
+    this.showDeleted = val;
+    this.items = this.filterRows(val, this.allItems);
+    this.assignTableSource();
+
+    this.dataSource.sortingDataAccessor = (child, colName) => {
+      switch (colName) {
+        case 'childStatus': {
+          return child.childStatus;
+        }
+      }
+    };
   }
 
 }

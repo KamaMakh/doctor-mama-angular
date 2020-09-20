@@ -19627,4 +19627,8 @@ tr.focusable:hover {
   cursor: pointer;
 }
 
+td.deleted {
+  color: #999 !important;
+}
+
 /*# sourceMappingURL=dashboard-free.css.map */

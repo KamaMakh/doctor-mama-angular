@@ -22,18 +22,22 @@
 
         <div *ngIf="items && (items.length > 0)">
 
+          <div class="m-4">
+            <button *ngIf="!showDeleted" mat-raised-button (click)="toggleRows(true)"> Показать удаленных </button>
+            <button *ngIf="showDeleted" mat-raised-button (click)="toggleRows(false)"> Скрыть удаленных </button>
+          </div>
           <table mat-table [dataSource]="dataSource" matSort class="table">
 
             <!-- ID -->
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef>№</th>
-              <td class="col-email paddings5lr" mat-cell *matCellDef="let item">{{item.childId}}</td>
+              <td class="col-email paddings5lr" mat-cell *matCellDef="let item" [ngClass]="{ deleted: item.childStatus === 'deleted' }">{{item.childId}}</td>
             </ng-container>
 
             <!-- Name -->
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef>Имя</th>
-              <td class="col-ownChildCount paddings5lr" mat-cell *matCellDef="let item">
+              <td class="col-ownChildCount paddings5lr" mat-cell *matCellDef="let item" [ngClass]="{ deleted: item.childStatus === 'deleted' }">
                 {{ item.childName }}
               </td>
             </ng-container>
@@ -41,7 +45,7 @@
             <!-- Дата рождения -->
             <ng-container matColumnDef="dateBirth">
               <th mat-header-cell *matHeaderCellDef>Дата рождения</th>
-              <td class="col-observedChildCount paddings5lr" mat-cell
+              <td class="col-observedChildCount paddings5lr" mat-cell [ngClass]="{ deleted: item.childStatus === 'deleted' }"
                   *matCellDef="let item">{{item.dateBirth | date: 'yyy-MM-dd'}}</td>
             </ng-container>
 
@@ -49,13 +53,13 @@
             <ng-container matColumnDef="email">
               <th mat-header-cell *matHeaderCellDef>E-mail</th>
               <td class="col-observedChildCount paddings5lr" mat-cell
-                  *matCellDef="let item">{{item.userEmail}}</td>
+                  *matCellDef="let item" [ngClass]="{ deleted: item.childStatus === 'deleted' }">{{item.userEmail}}</td>
             </ng-container>
 
             <!-- Оплаты -->
             <ng-container matColumnDef="status">
               <th mat-header-cell *matHeaderCellDef>Статус</th>
-              <td class="col-payments paddings5lr" [class]="{'text-success': item.childStatus == 'active'}" mat-cell *matCellDef="let item">
+              <td class="col-payments paddings5lr" [class]="{'text-success': item.childStatus == 'active'}" mat-cell *matCellDef="let item" [ngClass]="{ deleted: item.childStatus === 'deleted' }">
                 {{ item.childStatus === 'active' ? 'Активен' : 'Удален' }}
               </td>
             </ng-container>
@@ -63,7 +67,7 @@
             <!-- Действия -->
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Действия</th>
-              <td class="col-actions paddings5lr" mat-cell *matCellDef="let item">
+              <td class="col-actions paddings5lr" mat-cell *matCellDef="let item" [ngClass]="{ deleted: item.childStatus === 'deleted' }">
                 <button mat-raised-button (click)="openChart(item)" class="m-1" style="background: #9c27b0; color: #fff;"></button>
               </td>
             </ng-container>
@@ -88,6 +92,7 @@
           Пользователи не найдены
         </div>
       </div>
+      <button mat-raised-button (click)="router.navigate(['users'])">Назад</button>
     </div>
   </div>
 

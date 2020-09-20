@@ -16,5 +16,5 @@ export interface Children {
   summaryDaySleeping: number;
   nightSleeping: number;
   wakePeriod: number;
-  childStatus: boolean;
+  childStatus: string;
 }

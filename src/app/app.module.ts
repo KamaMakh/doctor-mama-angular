@@ -49,6 +49,7 @@ import { EditUserDialogComponent } from './dialog/edit-user-dialog/edit-user-dia
 import {DeleteUserDialogComponent} from './dialog/delete-user-dialog/delete-user-dialog.component';
 import { ChildrenComponent } from './views/children/children.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 registerLocaleData(localeRu);
 
@@ -73,33 +74,34 @@ registerLocaleData(localeRu);
     DeleteUserDialogComponent,
     ChildrenComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    MatProgressSpinnerModule,
-    MatInputModule,
-    ToastrModule.forRoot(),
-    MatIconModule,
-    MatButtonModule,
-    MatProgressBarModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatTabsModule,
-    MatDialogModule,
-    ChartsModule,
-    MatCardModule,
-    MatButtonToggleModule,
-    MatSelectModule,
-    MatListModule,
-    MatSlideToggleModule,
-    MatCheckboxModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientModule,
+        MatProgressSpinnerModule,
+        MatInputModule,
+        ToastrModule.forRoot(),
+        MatIconModule,
+        MatButtonModule,
+        MatProgressBarModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatTabsModule,
+        MatDialogModule,
+        ChartsModule,
+        MatCardModule,
+        MatButtonToggleModule,
+        MatSelectModule,
+        MatListModule,
+        MatSlideToggleModule,
+        MatCheckboxModule,
+        MatGridListModule
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
