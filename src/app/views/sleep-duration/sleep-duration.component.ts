@@ -45,13 +45,13 @@ export class SleepDurationComponent implements OnInit {
     maintainAspectRatio: false,
     legend: {
       labels: {
-        fontColor: 'white'
+        fontColor: '#666'
       }
     },
     scales: {
       yAxes: [{
         ticks: {
-          fontColor: 'white',
+          fontColor: '#666',
           fontSize: 14,
           stepSize: 10,
           beginAtZero: true
@@ -59,7 +59,7 @@ export class SleepDurationComponent implements OnInit {
       }],
       xAxes: [{
         ticks: {
-          fontColor: 'white',
+          fontColor: '#666',
           fontSize: 14,
           autoSkip: false,
           maxRotation: 90,
@@ -79,7 +79,7 @@ export class SleepDurationComponent implements OnInit {
 
   lineChartColors: Color[] = [
     {
-      borderColor: 'white',
+      borderColor: '#9c27b0',
       backgroundColor: 'transparent',
     },
   ];

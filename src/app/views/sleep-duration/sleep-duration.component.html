@@ -1,6 +1,26 @@
 <div class="main-panel">
+  <div class="container-fluid mb-2 mt-3">
+    <div class="navbar-wrapper flex-grow-1">
+      <mat-card *ngIf="currentChild && currentChild.childId" style="min-height: 88px;">
+        <mat-grid-list cols="4" rowHeight="50px">
+          <mat-grid-tile>
+            <div mat-line><b>Имя:</b> {{ currentChild.childName }}</div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div mat-line><b>Пол:</b> {{ currentChild.childSex === 'female' ? 'Ж' : 'М' }}</div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div mat-line><b>Дата рождения:</b> {{ currentChild.dateBirth | date: 'dd.MM.yyyy' }}</div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div mat-line><b>E-mail:</b> {{ currentChild.userEmail }}</div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card>
+    </div>
+  </div>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+  <nav class="navbar navbar-expand-lg navbar-transparent">
     <div class="container-fluid">
       <div class="navbar-wrapper flex-grow-1">
         <mat-card class="flex-grow-1 chart-filter">
@@ -56,26 +76,6 @@
     </div>
   </nav>
   <!-- End Navbar -->
-  <div class="container-fluid" style="margin-top: 120px;">
-    <div class="navbar-wrapper flex-grow-1">
-      <mat-card *ngIf="currentChild && currentChild.childId" class="mt-5" style="min-height: 88px;">
-        <mat-grid-list cols="4" rowHeight="50px">
-          <mat-grid-tile>
-            <div mat-line><b>Имя:</b> {{ currentChild.childName }}</div>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <div mat-line><b>Пол:</b> {{ currentChild.childSex === 'female' ? 'Ж' : 'М' }}</div>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <div mat-line><b>Дата рождения:</b> {{ currentChild.dateBirth | date: 'dd.MM.yyyy' }}</div>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <div mat-line><b>E-mail:</b> {{ currentChild.userEmail }}</div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </mat-card>
-    </div>
-  </div>
 
   <div class="content mt-0">
     <div *ngIf="currentChild && currentChild.childId" class="chart-wrapper fadeOut" #wrapper>
