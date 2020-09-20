@@ -45,6 +45,13 @@
                   *matCellDef="let item">{{item.dateBirth | date: 'yyy-MM-dd'}}</td>
             </ng-container>
 
+            <!-- Email -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>E-mail</th>
+              <td class="col-observedChildCount paddings5lr" mat-cell
+                  *matCellDef="let item">{{item.userEmail}}</td>
+            </ng-container>
+
             <!-- Оплаты -->
             <ng-container matColumnDef="status">
               <th mat-header-cell *matHeaderCellDef>Статус</th>
@@ -57,20 +64,13 @@
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Действия</th>
               <td class="col-actions paddings5lr" mat-cell *matCellDef="let item">
-                <div class="row">
-                  <button mat-icon-button (click)="openEditDialog(item)" class="m-1">
-                    <mat-icon aria-hidden="false">edit</mat-icon>
-                  </button>
-                  <button mat-icon-button color="warn" (click)="openDeleteDialog(item)" aria-label="m-1">
-                    <mat-icon>delete</mat-icon>
-                  </button>
-                </div>
+                <button mat-raised-button (click)="openChart(item)" class="m-1" style="background: #9c27b0; color: #fff;"></button>
               </td>
             </ng-container>
 
             <!-- какие поля отображать -->
             <tr mat-header-row *matHeaderRowDef="displayedColumns; "></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="focusable" (click)="openChart(row)"></tr>
 
           </table>
 

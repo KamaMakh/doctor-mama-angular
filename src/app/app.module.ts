@@ -48,6 +48,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { EditUserDialogComponent } from './dialog/edit-user-dialog/edit-user-dialog.component';
 import {DeleteUserDialogComponent} from './dialog/delete-user-dialog/delete-user-dialog.component';
 import { ChildrenComponent } from './views/children/children.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 registerLocaleData(localeRu);
 
@@ -96,7 +97,8 @@ registerLocaleData(localeRu);
     MatButtonToggleModule,
     MatSelectModule,
     MatListModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatCheckboxModule
   ],
   providers: [
     {

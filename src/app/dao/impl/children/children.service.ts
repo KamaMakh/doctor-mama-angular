@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ChildrenDao} from '../../interface/сhildren/ChildrenDao';
-import {ChildrenResponse} from '../../../model/children/Children';
+import {Children, ChildrenResponse} from '../../../model/children/Children';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
@@ -16,5 +16,9 @@ export class ChildrenService implements ChildrenDao{
   }
   findByUser(page: number, userId: number): Observable<ChildrenResponse> {
     return this.http.get<ChildrenResponse>(`/api/admin/child/user?page=${page}&userId=${userId}`);
+  }
+
+  getOne(id: number): Observable<Children> {
+    return this.http.get<Children>(`/api/admin/child/${id}`);
   }
 }

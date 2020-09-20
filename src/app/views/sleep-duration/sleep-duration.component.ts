@@ -9,6 +9,7 @@ import {Children} from '../../model/children/Children';
 import {ChartService} from '../../dao/impl/chart/chart.service';
 import {ToastrService} from 'ngx-toastr';
 import * as moment from 'moment';
+import {ChildrenService} from '../../dao/impl/children/children.service';
 
 @Component({
   selector: 'app-sleep-duration',
@@ -23,6 +24,7 @@ export class SleepDurationComponent implements OnInit {
   loading = false;
   width = 1600;
   minRotation = 0;
+  childId: number;
 
   @ViewChild('wrapper')
   chartCanvas: ElementRef<HTMLElement>;
@@ -63,6 +65,13 @@ export class SleepDurationComponent implements OnInit {
         },
         barThickness : 30
       }]
+    },
+    tooltips: {
+      callbacks: {
+        label: (tooltipItem, data) => {
+          return `${data.datasets[0].label}: ${this.timeConvert(data.datasets[0].data[tooltipItem.index])}`;
+        }
+      }
     }
   };
 
@@ -81,6 +90,7 @@ export class SleepDurationComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private chartService: ChartService,
+    private childrenService: ChildrenService,
     private toastr: ToastrService
   ) { }
 
@@ -169,7 +179,6 @@ export class SleepDurationComponent implements OnInit {
     this.loading = true;
     this.chartService.getSleepDuration(this.filter).subscribe(
       response => {
-        console.log(response);
         this.lineChartLabels = this.getDatesBetweenDates(
           `${this.filter.startYear}-${this.filter.startMonth}-${this.filter.startDay}`,
           `${this.filter.endYear}-${this.filter.endMonth}-${this.filter.endDay}`
@@ -186,7 +195,7 @@ export class SleepDurationComponent implements OnInit {
           if (response[key]) {
             const data = response[key];
             const date = moment.unix(data.date).format(this.interval === 'year' ? 'YYYY/MM/DD' : 'MM/DD');
-            arr[this.lineChartLabels.indexOf(date)] = Number(this.filter.dayPart === 'DAY' ? data.maxDaySleeping : this.filter.dayPart === 'NIGHT' ? data.maxNightSleeping : data.maxSummarySleeping);
+            arr[this.lineChartLabels.indexOf(date)] = Number((Number(data.duration) / 60 / 60).toFixed(2));
           }
         }
         this.lineChartData = [];
@@ -218,6 +227,30 @@ export class SleepDurationComponent implements OnInit {
       }
     }
     return dates;
+  }
+
+  timeConvert(hours) {
+    const seconds = hours * 60 * 60;
+    const formattedHours = Math.floor(moment.duration(seconds, 'seconds').asHours());
+    const minutes = Math.floor(moment.duration(seconds, 'seconds').minutes());
+    return (formattedHours < 10 ? '0' + formattedHours : formattedHours) + ':' + (minutes < 10 ? '0' + minutes : minutes);
+  }
+
+  searchChildByID() {
+    this.loading = true;
+    this.childrenService.getOne(this.childId).subscribe(
+      response => {
+        this.currentChild = response;
+        this.filter.childId = this.currentChild.childId;
+      },
+      () => {
+        this.toastr.error('Ребенка с таким идентификатором нет', 'Error');
+        this.loading = false;
+      },
+      () => {
+        this.loading = false;
+      }
+    );
   }
 
 }

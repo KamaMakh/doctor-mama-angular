@@ -16,11 +16,32 @@
               <mat-button-toggle (click)="chooseInterval('year')" value="year">Год</mat-button-toggle>
             </mat-button-toggle-group>
             <div class="chart-filter__select">
-              <button mat-button mat-raised-button (click)="openDialog()">
-                {{ currentChild && currentChild.childName ? currentChild.childName : 'Выбрать ребенка' }}
-              </button>
+              <div class="row">
+                <div class="col-8">
+                  <mat-form-field style="margin-left: 15px;">
+                    <mat-label>Идентификатор ребенка</mat-label>
+                    <input
+                      #inputName
+                      [(ngModel)]="childId"
+                      matInput maxlength="50"
+                      (keyup.enter)="searchChildByID()"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-4">
+                  <button mat-icon-button
+                          class="pull-left"
+                          (click)="searchChildByID()"
+                          [disabled]="loading || !childId"
+                  >
+                    <mat-icon *ngIf="!loading">search</mat-icon>
+                    <mat-spinner *ngIf="loading" diameter="25" class="m-1"></mat-spinner>
+                  </button>
+                </div>
+              </div>
             </div>
-            <button mat-button mat-raised-button [disabled]="!currentChild || !currentChild.childName || loading" (click)="search()">
+            <button mat-button mat-raised-button [disabled]="!currentChild || !currentChild.childName || loading" (click)="search()" style="min-width: 107px">
               <span *ngIf="!loading">
                 Применить
               </span>
@@ -33,7 +54,61 @@
   </nav>
   <!-- End Navbar -->
   <div class="content">
-    <div class="chart-wrapper" #wrapper>
+    <mat-card *ngIf="currentChild && currentChild.childId" class="mb-5 mt-5 fadeInDown" style="width: 500px">
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <div mat-line><b>Идентификатор:</b> {{ currentChild.childId }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">
+          <div mat-line><b>Имя:</b> {{ currentChild.childName }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">
+          <div mat-line><b>Пол:</b> {{ currentChild.childSex === 'female' ? 'Ж' : 'М' }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">
+          <div mat-line><b>Дата рождения:</b> {{ currentChild.dateBirth }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">
+          <div mat-line><b>E-mail:</b> {{ currentChild.userEmail }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">
+          <div mat-line><b>Статус:</b> {{ currentChild.childStatus === 'active' ? 'Активен' : 'Удален' }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">
+          <div mat-line><b>Грудное вскармливание:</b>  <mat-checkbox disabled [ngModel]="currentChild.breastFeeding"></mat-checkbox></div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">
+          <div mat-line><b>Искусственное вскармливание:</b>  <mat-checkbox disabled [ngModel]="currentChild.bottleFeeding"></mat-checkbox></div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">
+          <div mat-line><b>Норма дневного сна:</b> {{ currentChild.daySleeping }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">
+          <div mat-line><b>Суммарная норма сна:</b> {{ currentChild.summaryDaySleeping }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">
+          <div mat-line><b>Норма ночного сна:</b> {{ currentChild.nightSleeping }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">
+          <div mat-line><b>Время бодрствования:</b> {{ currentChild.wakePeriod }}</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>
+
+  <div class="content">
+    <div *ngIf="currentChild && currentChild.childId" class="chart-wrapper fadeOut" #wrapper>
       <canvas
         baseChart
         [datasets]="lineChartData"

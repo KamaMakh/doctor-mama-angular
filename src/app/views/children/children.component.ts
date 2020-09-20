@@ -29,7 +29,7 @@ export class ChildrenComponent extends GeneralTableView<Children> implements OnI
 
   ngOnInit(): void {
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
-    this.displayedColumns = ['id', 'name', 'dateBirth', 'status', 'actions'];
+    this.displayedColumns = ['id', 'name', 'dateBirth', 'email', 'status'];
     if (!this.items) {
       this.pageSize = 25;
       this.pageNumber = 0;
@@ -55,7 +55,6 @@ export class ChildrenComponent extends GeneralTableView<Children> implements OnI
     this.pageNumber = pageEvent.pageIndex;
     this.getAllChildren();
   }
-  openEditDialog(child: Children) {}
-  openDeleteDialog(child: Children) {}
+  openChart(child: Children) {}
 
 }

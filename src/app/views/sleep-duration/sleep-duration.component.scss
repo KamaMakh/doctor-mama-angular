@@ -22,7 +22,7 @@
     }
   }
   &__select {
-    max-width: 200px;
+    //max-width: 300px;
     button {
       background: #513453;
       color: #fff;
@@ -43,4 +43,9 @@
     position: relative;
     padding: 20px 0;
   }
+}
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

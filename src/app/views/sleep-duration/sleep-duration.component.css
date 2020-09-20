@@ -16,9 +16,6 @@
 .chart-filter__toggle .mat-button-toggle.mat-button-toggle-checked .mat-button-toggle-button .mat-button-toggle-label-content {
   color: #fff;
 }
-.chart-filter__select {
-  max-width: 200px;
-}
 .chart-filter__select button {
   background: #513453;
   color: #fff;
@@ -38,6 +35,12 @@
   background: linear-gradient(135deg, #916BFF 0%, #3366FF 98.38%);
   position: relative;
   padding: 20px 0;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=sleep-duration.component.css.map */
