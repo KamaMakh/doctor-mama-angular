@@ -6,8 +6,8 @@ import {ToastrService} from 'ngx-toastr';
 import {PageEvent} from '@angular/material/paginator';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogAction} from '../../object/DialogResult';
-import {Children} from '../../model/children/Children';
 import {EditUserDialogComponent} from '../../dialog/edit-user-dialog/edit-user-dialog.component';
+import {DeleteUserDialogComponent} from '../../dialog/delete-user-dialog/delete-user-dialog.component';
 
 @Component({
   selector: 'app-user',
@@ -35,10 +35,29 @@ export class UserComponent extends GeneralTableView<UserResponse> implements OnI
     }
   }
 
-  openDialog(user: UserResponse): void {
+  openEditDialog(user: UserResponse): void {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
       data: {
         title: 'Смена пароля',
+        user
+      },
+      width: '600px',
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!(result)) { // если просто закрыли окно, ничего не нажав
+        return;
+      }
+      if (result.action === DialogAction.OK) { // нажали сохранить (обрабатывает как добавление, так и удаление)
+        return;
+      }
+    });
+  }
+
+  openDeleteDialog(user: UserResponse): void {
+    const dialogRef = this.dialog.open(DeleteUserDialogComponent, {
+      data: {
+        title: 'Удаление пользователя',
         user
       },
       width: '500px',
@@ -49,6 +68,15 @@ export class UserComponent extends GeneralTableView<UserResponse> implements OnI
         return;
       }
       if (result.action === DialogAction.OK) { // нажали сохранить (обрабатывает как добавление, так и удаление)
+        if (result.obj) {
+          this.items.forEach((item, key) => {
+            if (Number(item.id) === Number(result.obj.id)) {
+              this.items.splice(key, 1);
+              this.assignTableSource();
+              return;
+            }
+          });
+        }
         return;
       }
     });

@@ -4,6 +4,7 @@ export interface UsersResponse {
 }
 
 export interface UserResponse {
+  id: number;
   email: string;
   ownChildCount: number;
   observedChildCount: number;

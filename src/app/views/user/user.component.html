@@ -64,7 +64,7 @@
 
         <div *ngIf="items && (items.length > 0)">
 
-          <table mat-table [dataSource]="dataSource" matSort class="table-responsive width100">
+          <table mat-table [dataSource]="dataSource" matSort class="table">
 
             <!-- Email -->
             <ng-container matColumnDef="email">
@@ -98,10 +98,15 @@
             <!-- Действия -->
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Действия</th>
-              <td class="col-payments paddings5lr" mat-cell *matCellDef="let item">
-                <button mat-icon-button (click)="openDialog(item)" class="pencil-icon">
-                  <mat-icon aria-hidden="false">edit</mat-icon>
-                </button>
+              <td class="col-actions paddings5lr" mat-cell *matCellDef="let item">
+                <div class="row">
+                  <button mat-icon-button (click)="openEditDialog(item)" class="m-1">
+                    <mat-icon aria-hidden="false">edit</mat-icon>
+                  </button>
+                  <button mat-icon-button color="warn" (click)="openDeleteDialog(item)" aria-label="m-1">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
               </td>
             </ng-container>
 

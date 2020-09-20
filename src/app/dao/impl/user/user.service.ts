@@ -30,4 +30,8 @@ export class UserService implements UserDao {
       newPassword
     });
   }
+
+  delete(id: number): Observable<UserResponseAfterUpdate> {
+    return this.http.post<UserResponseAfterUpdate>(`/api/admin/user/${id}`, id);
+  }
 }
