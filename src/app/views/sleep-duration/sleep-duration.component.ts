@@ -10,6 +10,7 @@ import {ChartService} from '../../dao/impl/chart/chart.service';
 import {ToastrService} from 'ngx-toastr';
 import * as moment from 'moment';
 import {ChildrenService} from '../../dao/impl/children/children.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-sleep-duration',
@@ -25,6 +26,7 @@ export class SleepDurationComponent implements OnInit {
   width = 1600;
   minRotation = 0;
   childId: number;
+  disableChanging: boolean;
 
   @ViewChild('wrapper')
   chartCanvas: ElementRef<HTMLElement>;
@@ -91,10 +93,12 @@ export class SleepDurationComponent implements OnInit {
     private dialog: MatDialog,
     private chartService: ChartService,
     private childrenService: ChildrenService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.disableChanging = false;
     const now = new Date();
     const pastDate = new Date();
     pastDate.setDate(now.getDate() - 7);
@@ -113,6 +117,12 @@ export class SleepDurationComponent implements OnInit {
       `${this.filter.startYear}-${this.filter.startMonth}-${this.filter.startDay}`,
       `${this.filter.endYear}-${this.filter.endMonth}-${this.filter.endDay}`
     );
+    if (this.route.snapshot.paramMap.get('childId')) {
+      this.disableChanging = true;
+      this.childId = Number(this.route.snapshot.paramMap.get('childId'));
+      this.searchChildByID();
+      this.search();
+    }
   }
 
   setChartWidth(): void {
@@ -183,12 +193,14 @@ export class SleepDurationComponent implements OnInit {
           `${this.filter.startYear}-${this.filter.startMonth}-${this.filter.startDay}`,
           `${this.filter.endYear}-${this.filter.endMonth}-${this.filter.endDay}`
         );
-        if (this.interval === 'year') {
-          this.chartCanvas.nativeElement.style.width = 365 * 30 + 'px';
-          this.minRotation = 90;
-        } else {
-          this.chartCanvas.nativeElement.style.width = '100%';
-          this.minRotation = 0;
+        if (this.chartCanvas) {
+          if (this.interval === 'year') {
+            this.chartCanvas.nativeElement.style.width = 365 * 30 + 'px';
+            this.minRotation = 90;
+          } else {
+            this.chartCanvas.nativeElement.style.width = '100%';
+            this.minRotation = 0;
+          }
         }
         const arr = [];
         for (const key in response) {

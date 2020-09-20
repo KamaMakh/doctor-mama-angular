@@ -57,6 +57,10 @@ const routes: Routes = [
         path: 'charts',
         component: SleepDurationComponent
       },
+      {
+        path: 'charts/:childId',
+        component: SleepDurationComponent
+      },
       ...directoriesRoutes,
       ...usersRoutes
     ]

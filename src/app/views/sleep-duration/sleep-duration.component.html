@@ -25,6 +25,7 @@
                       [(ngModel)]="childId"
                       matInput maxlength="50"
                       (keyup.enter)="searchChildByID()"
+                      [disabled]="disableChanging"
                     />
                   </mat-form-field>
                 </div>
@@ -33,7 +34,7 @@
                   <button mat-icon-button
                           class="pull-left"
                           (click)="searchChildByID()"
-                          [disabled]="loading || !childId"
+                          [disabled]="loading || !childId || disableChanging"
                   >
                     <mat-icon *ngIf="!loading">search</mat-icon>
                     <mat-spinner *ngIf="loading" diameter="25" class="m-1"></mat-spinner>
@@ -54,7 +55,7 @@
   </nav>
   <!-- End Navbar -->
   <div class="content">
-    <mat-card *ngIf="currentChild && currentChild.childId" class="mb-5 mt-5 fadeInDown" style="width: 500px">
+    <mat-card *ngIf="currentChild && currentChild.childId" class="mt-5 fadeInDown" style="width: 500px">
       <mat-list role="list">
         <mat-list-item role="listitem">
           <div mat-line><b>Идентификатор:</b> {{ currentChild.childId }}</div>

@@ -55,6 +55,8 @@ export class ChildrenComponent extends GeneralTableView<Children> implements OnI
     this.pageNumber = pageEvent.pageIndex;
     this.getAllChildren();
   }
-  openChart(child: Children) {}
+  openChart(child: Children): void {
+    this.router.navigate([`charts/${child.childId}`]);
+  }
 
 }
