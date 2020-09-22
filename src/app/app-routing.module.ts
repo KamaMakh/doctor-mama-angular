@@ -9,8 +9,9 @@ import {DirectoryComponent} from './views/directory/directory.component';
 import {ActivityTypesComponent} from './views/activity-types/activity-types.component';
 import {SleepingAssociationsComponent} from './views/sleeping-associations/sleeping-associations.component';
 import {SleepDurationComponent} from './views/sleep-duration/sleep-duration.component';
-import {CommercialComponent} from "./views/commercial/commercial.component";
+import {CommercialComponent} from './views/commercial/commercial.component';
 import {ChildrenComponent} from './views/children/children.component';
+import {WebinarsComponent} from './views/webinars/webinars.component';
 
 const directoriesRoutes: Routes = [
   {
@@ -38,6 +39,17 @@ const usersRoutes: Routes = [
   }
 ];
 
+const chartsRoutes: Routes = [
+  {
+    path: 'charts',
+    component: SleepDurationComponent
+  },
+  {
+    path: 'charts/:childId',
+    component: SleepDurationComponent
+  },
+];
+
 const routes: Routes = [
   {
     path: '',
@@ -52,17 +64,14 @@ const routes: Routes = [
         path: 'commercial',
         component: CommercialComponent
       },
+      {
+        path: 'webinars',
+        component: WebinarsComponent
+      },
       {path: '', redirectTo: '/users', pathMatch: 'full'},
-      {
-        path: 'charts',
-        component: SleepDurationComponent
-      },
-      {
-        path: 'charts/:childId',
-        component: SleepDurationComponent
-      },
       ...directoriesRoutes,
-      ...usersRoutes
+      ...usersRoutes,
+      ...chartsRoutes
     ]
   },
   {

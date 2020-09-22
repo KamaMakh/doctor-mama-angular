@@ -10,6 +10,20 @@ export interface SleepDurationResponse {
   maxSummarySleeping: number;
 }
 
+export interface SleepDurationResponseTotal {
+  date: number;
+  dayDuration: number;
+  nightDuration: number;
+  totalDuration: number;
+  dayPart?: string | null;
+  minDaySleeping: number;
+  maxDaySleeping: number;
+  minNightSleeping: number;
+  maxNightSleeping: number;
+  minSummarySleeping: number;
+  maxSummarySleeping: number;
+}
+
 export interface SleepDurationRequest {
   childId: number;
   startDay: number;

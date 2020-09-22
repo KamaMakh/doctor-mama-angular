@@ -18,6 +18,8 @@ export class ChildrenComponent extends GeneralTableView<Children> implements OnI
   showDeleted = false;
   userId: number;
   allItems: Children[];
+  currentUser: any;
+  role: string;
   constructor(
     private toastr: ToastrService,
     private userService: UserService,
@@ -37,6 +39,8 @@ export class ChildrenComponent extends GeneralTableView<Children> implements OnI
       this.pageNumber = 0;
       this.getAllChildren();
     }
+    this.currentUser = localStorage.getItem('currentUserDoctorMama') ? JSON.parse(localStorage.getItem('currentUserDoctorMama')) : '';
+    this.role = this.currentUser?.roles[0]?.role;
   }
 
   getAllChildren() {
@@ -59,6 +63,9 @@ export class ChildrenComponent extends GeneralTableView<Children> implements OnI
     this.getAllChildren();
   }
   openChart(child: Children): void {
+    if (this.role === 'admin') {
+      return;
+    }
     this.router.navigate([`charts/${child.childId}`]);
   }
 

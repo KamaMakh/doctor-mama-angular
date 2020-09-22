@@ -9,8 +9,9 @@ import {AuthenticationService} from './authentication.service';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
-  public currentUser;
-
+  currentUser;
+  role: string;
+  enabledURLs: string[];
   constructor(private router: Router,
               private authenticationService: AuthenticationService) {
   }
@@ -21,14 +22,36 @@ export class InterceptorService implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const reqUrl = environment.apiBaseUrl;
     if (!request.url.includes('/api/auth/admin')) {
-      this.currentUser = localStorage.getItem('currentUserDoctorMama') ? JSON.parse(localStorage.getItem('currentUserDoctorMama')) : '';
-      request = request.clone({
-        headers: request.headers.set(
-          'Authorization',
-          'Bearer ' + this.currentUser.accessToken
-        ),
-        url: reqUrl + '' + request.url,
-      });
+      if (localStorage.getItem('currentUserDoctorMama')) {
+        this.currentUser = localStorage.getItem('currentUserDoctorMama') ? JSON.parse(localStorage.getItem('currentUserDoctorMama')) : '';
+        this.role = this.currentUser?.roles[0]?.role;
+        if (this.role === 'admin') {
+          this.enabledURLs = ['users', 'commercial', 'webinars', 'children'];
+        } else {
+          this.enabledURLs = ['users', 'children', 'charts'];
+        }
+        let enableURL = false;
+        this.enabledURLs.forEach(url => {
+          if (location.href.indexOf(url) > -1) {
+            enableURL = true;
+          }
+        });
+        if (!enableURL) {
+          this.router.navigate(['users']);
+          return;
+        }
+        request = request.clone({
+          headers: request.headers.set(
+            'Authorization',
+            'Bearer ' + this.currentUser.accessToken
+          ),
+          url: reqUrl + '' + request.url,
+        });
+      } else {
+        this.authenticationService.logout();
+        this.router.navigate(['login'], {queryParams: {returnUrl: request.url}});
+        return;
+      }
     } else {
       request = request.clone({
         url: reqUrl + '' + request.url,

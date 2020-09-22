@@ -10,7 +10,7 @@
             <div mat-line><b>Пол:</b> {{ currentChild.childSex === 'female' ? 'Ж' : 'М' }}</div>
           </mat-grid-tile>
           <mat-grid-tile>
-            <div mat-line><b>Дата рождения:</b> {{ currentChild.dateBirth | date: 'dd.MM.yyyy' }}</div>
+            <div mat-line><b>Дата рождения:</b> {{ currentChild.dateBirth | date: 'dd.MM.yyyy' }} ({{ childAgeWeeks }} нед.)</div>
           </mat-grid-tile>
           <mat-grid-tile>
             <div mat-line><b>E-mail:</b> {{ currentChild.userEmail }}</div>
@@ -29,7 +29,7 @@
                                      class="chart-filter__toggle" appearance="legacy">
               <mat-button-toggle value="DAY">Дневной сон</mat-button-toggle>
               <mat-button-toggle value="NIGHT">Ночной сон</mat-button-toggle>
-              <mat-button-toggle [value]="null">Общее</mat-button-toggle>
+              <mat-button-toggle [value]="null">Суммарный сон</mat-button-toggle>
             </mat-button-toggle-group>
             <mat-button-toggle-group [ngModel]="interval" class="chart-filter__toggle" appearance="legacy">
               <mat-button-toggle (click)="chooseInterval('week')" value="week">Неделя</mat-button-toggle>

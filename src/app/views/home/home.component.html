@@ -14,17 +14,17 @@
           <a class="nav-link pointer"
              routerLink="/users">
             <!--            <i class="material-icons">receipt</i>-->
-            <p>Пользователи</p>
+            <p>Мои клиенты</p>
           </a>
         </li>
 
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link pointer"
-             routerLink="/avatars">
-            <!--            <i class="material-icons">list</i>-->
-            <p>Аватарки детей</p>
-          </a>
-        </li>
+<!--        <li class="nav-item" routerLinkActive="active">-->
+<!--          <a class="nav-link pointer"-->
+<!--             routerLink="/avatars">-->
+<!--            &lt;!&ndash;            <i class="material-icons">list</i>&ndash;&gt;-->
+<!--            <p>Аватарки детей</p>-->
+<!--          </a>-->
+<!--        </li>-->
 
         <!--<li class="nav-item" routerLinkActive="active">-->
           <!--<a class="nav-link pointer"-->
@@ -34,11 +34,11 @@
           <!--</a>-->
         <!--</li>-->
 
-        <li class="nav-item" routerLinkActive="active">
+        <li *ngIf="role === 'admin'" class="nav-item" routerLinkActive="active">
           <a class="nav-link pointer"
              routerLink="/webinars">
             <!--            <i class="material-icons">fastfood</i>-->
-            <p>Вебинары</p>
+            <p>Продукты</p>
           </a>
         </li>
 
@@ -50,7 +50,7 @@
           <!--</a>-->
         <!--</li>-->
 
-        <li class="nav-item" routerLinkActive="active">
+        <li *ngIf="role !== 'admin'" class="nav-item" routerLinkActive="active">
           <a class="nav-link pointer"
              routerLink="/charts"
              routerLinkActive="active">
@@ -59,7 +59,7 @@
           </a>
         </li>
 
-        <li class="nav-item" routerLinkActive="active">
+        <li *ngIf="role === 'admin'" class="nav-item" routerLinkActive="active">
           <a class="nav-link pointer"
              routerLink="/commercial">
             <!--            <i class="material-icons">attach_money</i>-->

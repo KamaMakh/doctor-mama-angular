@@ -18,7 +18,6 @@ import {Router} from '@angular/router';
 export class UserComponent extends GeneralTableView<UserResponse> implements OnInit {
 
   filterEmail: string;
-
   constructor(
     private toastr: ToastrService,
     private userService: UserService,
@@ -29,7 +28,13 @@ export class UserComponent extends GeneralTableView<UserResponse> implements OnI
   }
 
   ngOnInit(): void {
-    this.displayedColumns = ['email', 'ownChildCount', 'observedChildCount', 'payments', 'actions'];
+    const currentUser = localStorage.getItem('currentUserDoctorMama') ? JSON.parse(localStorage.getItem('currentUserDoctorMama')) : '';
+    const role = currentUser?.roles[0]?.role;
+    if (role && role === 'consultant') {
+      this.displayedColumns = ['email', 'ownChildCount', 'observedChildCount', 'actions'];
+    } else {
+      this.displayedColumns = ['email', 'ownChildCount', 'observedChildCount', 'payments', 'actions'];
+    }
     if (!this.items) {
       this.pageSize = 25;
       this.pageNumber = 0;

@@ -1,0 +1,97 @@
+<div class="main-panel">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+    <div class="container-fluid">
+      <div class="navbar-wrapper">
+        <a class="navbar-brand">Вебинары</a>
+      </div>
+      <div>
+        <button class="right-button btn btn-primary"
+                mat-raised-button color="primary"
+                (click)="openEditDialog(null)"
+        >
+          <mat-icon class="button-add" style="width: 20px; height: 20px;">add</mat-icon>
+          Вебинар
+        </button>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+
+  <div class="content">
+
+    <div class="container-fluid">
+
+      <div class="card">
+        <div class="card-header card-header-warning">
+          <h4 class="card-title">Вебинары</h4>
+
+          <p class="card-category">Всего: {{totalElements}}</p>
+        </div>
+
+        <div *ngIf="items && (items.length > 0)">
+          <table mat-table [dataSource]="dataSource" matSort class="table">
+
+            <!-- ID -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>№</th>
+              <td class="col-email paddings5lr" mat-cell *matCellDef="let item">{{item.webinarId}}</td>
+            </ng-container>
+
+            <!-- Name -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell class="" *matHeaderCellDef>Имя</th>
+              <td class="col-ownChildCount paddings5lr" mat-cell *matCellDef="let item">
+                {{ item.name }}
+              </td>
+            </ng-container>
+
+            <!--description -->
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef class="text-center">Описание</th>
+              <td class="col-observedChildCount paddings5lr text-center" mat-cell
+                  *matCellDef="let item">{{item.description}}</td>
+            </ng-container>
+
+            <!-- Цена -->
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef class="text-center">Цена</th>
+              <td class="col-observedChildCount paddings5lr text-center" mat-cell
+                  *matCellDef="let item">{{item.price}}</td>
+            </ng-container>
+
+            <!-- Действия -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell class="text-center" *matHeaderCellDef>Действия</th>
+              <td class="col-actions paddings5lr text-center" mat-cell *matCellDef="let item">
+                <button mat-icon-button class="m-1" style="background: #9c27b0; color: #fff;" (click)="openEditDialog(item)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <!-- какие поля отображать -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; "></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="focusable"></tr>
+
+          </table>
+
+          <mat-paginator
+            (page)="pageChanged($event)"
+            [pageIndex]="pageNumber"
+            [pageSize]="pageSize"
+            [length]="totalElements"
+            [pageSizeOptions]="[25]"
+            showFirstLastButtons>
+          </mat-paginator>
+        </div>
+
+        <div class="item-not-found col-md-12 col-lg-12 col-sm-12 col-xs-12" *ngIf="items && items.length === 0">
+          Вебинары не найдены
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>

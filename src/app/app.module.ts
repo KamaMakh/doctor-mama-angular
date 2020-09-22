@@ -50,6 +50,8 @@ import {DeleteUserDialogComponent} from './dialog/delete-user-dialog/delete-user
 import { ChildrenComponent } from './views/children/children.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { WebinarsComponent } from './views/webinars/webinars.component';
+import { EditWebinarDialogComponent } from './dialog/edit-webinar-dialog/edit-webinar-dialog.component';
 
 registerLocaleData(localeRu);
 
@@ -72,7 +74,9 @@ registerLocaleData(localeRu);
     CommercialComponent,
     EditUserDialogComponent,
     DeleteUserDialogComponent,
-    ChildrenComponent
+    ChildrenComponent,
+    WebinarsComponent,
+    EditWebinarDialogComponent
   ],
     imports: [
         BrowserModule,

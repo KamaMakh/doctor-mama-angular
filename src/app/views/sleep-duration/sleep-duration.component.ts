@@ -1,7 +1,7 @@
 import {Component, OnInit, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import {BaseChartDirective, Color, Label} from 'ng2-charts';
-import {SleepDurationRequest} from '../../model/charts/SleepDuration';
+import {SleepDurationRequest, SleepDurationResponse, SleepDurationResponseTotal} from '../../model/charts/SleepDuration';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogAction} from '../../object/DialogResult';
 import {ChartFilterDialogComponent} from '../../dialog/chart-filter-dialog/chart-filter-dialog.component';
@@ -22,6 +22,7 @@ export class SleepDurationComponent implements OnInit {
   filter: SleepDurationRequest;
   interval: string;
   currentChild: Children;
+  childAgeWeeks = 0;
   loading = false;
   width = 1600;
   minRotation = 0;
@@ -178,7 +179,7 @@ export class SleepDurationComponent implements OnInit {
         return;
       }
       if (result.action === DialogAction.OK) { // нажали сохранить (обрабатывает как добавление, так и удаление)
-        this.currentChild = result.obj as Children;
+        this.setChild(result.obj as Children);
         this.filter.childId = this.currentChild.childId;
         return;
       }
@@ -187,42 +188,95 @@ export class SleepDurationComponent implements OnInit {
 
   search(): void {
     this.loading = true;
-    this.chartService.getSleepDuration(this.filter).subscribe(
-      response => {
-        this.lineChartLabels = this.getDatesBetweenDates(
-          `${this.filter.startYear}-${this.filter.startMonth}-${this.filter.startDay}`,
-          `${this.filter.endYear}-${this.filter.endMonth}-${this.filter.endDay}`
-        );
-        if (this.chartCanvas) {
-          if (this.interval === 'year') {
-            this.chartCanvas.nativeElement.style.width = 365 * 30 + 'px';
-            this.minRotation = 90;
-          } else {
-            this.chartCanvas.nativeElement.style.width = '100%';
-            this.minRotation = 0;
-          }
+    if (this.filter.dayPart) {
+      this.chartService.getSleepDuration(this.filter).subscribe(
+        response => {
+          this.setAllData(response);
+        }, error1 => {
+          this.toastr.error(error1.message, 'Error');
+        },
+        () => {
+          this.loading = false;
         }
-        const arr = [];
-        for (const key in response) {
-          if (response[key]) {
-            const data = response[key];
-            const date = moment.unix(data.date).format(this.interval === 'year' ? 'YYYY/MM/DD' : 'MM/DD');
-            arr[this.lineChartLabels.indexOf(date)] = Number((Number(data.duration) / 60 / 60).toFixed(2));
-          }
+      );
+    } else {
+      this.chartService.getSleepDurationTotal(this.filter).subscribe(
+        response => {
+          this.setAllData(response);
+        }, error1 => {
+          this.toastr.error(error1.message, 'Error');
+        },
+        () => {
+          this.loading = false;
         }
-        this.lineChartData = [];
-        this.lineChartData.push({
-          data: arr,
-          label: this.filter.dayPart === 'DAY' ? 'Дневной сон' : this.filter.dayPart === 'NIGHT' ? 'Ночной сон' : 'Общий сон',
-          borderColor: 'white', backgroundColor: 'transparent'
-        });
-      }, error1 => {
-        this.toastr.error(error1.message, 'Error');
-      },
-      () => {
-        this.loading = false;
-      }
+      );
+    }
+  }
+
+  setAllData(response: SleepDurationResponse | SleepDurationResponseTotal) {
+    this.lineChartLabels = this.getDatesBetweenDates(
+      `${this.filter.startYear}-${this.filter.startMonth}-${this.filter.startDay}`,
+      `${this.filter.endYear}-${this.filter.endMonth}-${this.filter.endDay}`
     );
+    if (this.chartCanvas) {
+      if (this.interval === 'year') {
+        this.chartCanvas.nativeElement.style.width = 365 * 30 + 'px';
+        this.minRotation = 90;
+      } else {
+        this.chartCanvas.nativeElement.style.width = '100%';
+        this.minRotation = 0;
+      }
+    }
+
+    this.lineChartData = [];
+    if (this.filter.dayPart) {
+      const arr = [];
+      for (const key in response) {
+        if (response[key]) {
+          const data = response[key];
+          const date = moment.unix(data.date).format(this.interval === 'year' ? 'YYYY/MM/DD' : 'MM/DD');
+          arr[this.lineChartLabels.indexOf(date)] = Number((Number(data.duration) / 60 / 60).toFixed(2));
+        }
+      }
+      this.lineChartData.push({
+        data: arr,
+        label: this.filter.dayPart === 'DAY' ? 'Дневной сон' : this.filter.dayPart === 'NIGHT' ? 'Ночной сон' : 'Общий сон',
+        borderColor: 'white', backgroundColor: 'transparent'
+      });
+    } else {
+      const dayArr = [];
+      const nightArr = [];
+      const allArr = [];
+      for (const key in response) {
+        if (response[key]) {
+          const data = response[key];
+          const date = moment.unix(data.date).format(this.interval === 'year' ? 'YYYY/MM/DD' : 'MM/DD');
+          dayArr[this.lineChartLabels.indexOf(date)] = Number((Number(data.dayDuration) / 60 / 60).toFixed(2));
+          nightArr[this.lineChartLabels.indexOf(date)] = Number((Number(data.nightDuration) / 60 / 60).toFixed(2));
+          allArr[this.lineChartLabels.indexOf(date)] = Number((Number(data.totalDuration) / 60 / 60).toFixed(2));
+        }
+      }
+      this.lineChartData.push({
+        data: dayArr,
+        label: 'Дневной сон',
+        borderColor: 'purple', backgroundColor: 'transparent'
+      });
+      this.lineChartData.push({
+        data: nightArr,
+        label: 'Ночной сон',
+        borderColor: 'lightblue', backgroundColor: 'transparent'
+      });
+      this.lineChartData.push({
+        data: allArr,
+        label: 'Суммарный сон',
+        borderColor: 'lightgrey', backgroundColor: 'transparent'
+      });
+    }
+  }
+
+  setChild(child: Children) {
+    this.currentChild = child;
+    this.childAgeWeeks = moment(new Date()).diff(this.currentChild.dateBirth, 'weeks');
   }
 
   getDatesBetweenDates(startDate: string, endDate: string, dateFormat = 'YYYY/MM/DD'): string[] {
@@ -252,10 +306,10 @@ export class SleepDurationComponent implements OnInit {
     this.loading = true;
     this.childrenService.getOne(this.childId).subscribe(
       response => {
-        this.currentChild = response;
+        this.setChild(response);
         this.filter.childId = this.currentChild.childId;
       },
-      () => {
+      (error) => {
         this.toastr.error('Ребенка с таким идентификатором нет', 'Error');
         this.loading = false;
       },

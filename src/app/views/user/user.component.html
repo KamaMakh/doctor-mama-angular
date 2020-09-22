@@ -3,7 +3,7 @@
   <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
     <div class="container-fluid">
       <div class="navbar-wrapper">
-        <a class="navbar-brand">Пользователи</a>
+        <a class="navbar-brand">Мои клиенты</a>
       </div>
     </div>
   </nav>
@@ -57,7 +57,7 @@
 
       <div class="card">
         <div class="card-header card-header-warning">
-          <h4 class="card-title">Пользователи</h4>
+          <h4 class="card-title">Мои клиенты</h4>
 
           <p class="card-category">Всего: {{totalElements}}</p>
         </div>
@@ -74,7 +74,7 @@
 
             <!-- Своих детей -->
             <ng-container matColumnDef="ownChildCount">
-              <th mat-header-cell *matHeaderCellDef>Своих детей</th>
+              <th mat-header-cell *matHeaderCellDef class="text-center">Своих детей</th>
               <td class="col-ownChildCount paddings5lr" mat-cell *matCellDef="let item">
                 <button mat-raised-button style="background: #9c27b0; color: white;" (click)="openChildren(item)">
                   <mat-icon aria-hidden="false">remove_red_eye</mat-icon>
@@ -85,7 +85,7 @@
 
             <!-- Детей с доступом -->
             <ng-container matColumnDef="observedChildCount">
-              <th mat-header-cell *matHeaderCellDef>Детей с доступом</th>
+              <th mat-header-cell *matHeaderCellDef class="text-center">Детей с доступом</th>
               <td class="col-observedChildCount paddings5lr" mat-cell
                   *matCellDef="let item">{{item.observedChildCount}}</td>
             </ng-container>
@@ -102,9 +102,9 @@
 
             <!-- Действия -->
             <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef>Действия</th>
+              <th mat-header-cell *matHeaderCellDef class="text-center">Действия</th>
               <td class="col-actions paddings5lr" mat-cell *matCellDef="let item">
-                <div class="row">
+                <div class="row justify-content-center">
                   <button mat-icon-button (click)="openEditDialog(item)" class="m-1">
                     <mat-icon aria-hidden="false">edit</mat-icon>
                   </button>
@@ -132,7 +132,7 @@
         </div>
 
         <div class="item-not-found col-md-12 col-lg-12 col-sm-12 col-xs-12" *ngIf="items && items.length === 0">
-          Пользователи не найдены
+          Клиенты не найдены
         </div>
       </div>
     </div>

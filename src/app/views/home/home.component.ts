@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
   pageCommercial = 6;
 
   currentPage: number;
+  currentUser: any;
+  role: string;
 
   constructor(private router: Router,
               private authenticationService: AuthenticationService) {
@@ -29,6 +31,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentPage = this.pageUser;
+    this.currentUser = localStorage.getItem('currentUserDoctorMama') ? JSON.parse(localStorage.getItem('currentUserDoctorMama')) : '';
+    this.role = this.currentUser?.roles[0]?.role;
   }
 
   logout() {

@@ -4,10 +4,12 @@
 
 .col-ownChildCount {
   width: 20% !important;
+  text-align: center;
 }
 
 .col-observedChildCount {
   width: 20% !important;
+  text-align: center;
 }
 
 .col-payments {
@@ -34,4 +36,8 @@
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.col-actions {
+  text-align: center;
 }

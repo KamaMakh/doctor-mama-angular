@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {CommercialService} from "../../dao/impl/commercial/commercial.service";
-import {environment} from "../../../environments/environment.prod";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {ToastrService} from "ngx-toastr";
+import {CommercialService} from '../../dao/impl/commercial/commercial.service';
+import {environment} from '../../../environments/environment.prod';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-commercial',
@@ -51,12 +51,12 @@ export class CommercialComponent implements OnInit {
       this.pathNow = result.path;
 
       if (!this.isFirstLoad) {
-        this.currentImage = <HTMLImageElement>document.getElementById('myImage');
+        this.currentImage = (document.getElementById('myImage') as HTMLImageElement);
         this.currentImage.src = this.getImage(this.pathNow);
       }
       this.isFirstLoad = false;
     }, error1 => {
-      this.toastr.error(error1.message, 'Error')
+      this.toastr.error(error1.message, 'Error');
     });
 
   }
@@ -71,10 +71,10 @@ export class CommercialComponent implements OnInit {
     const file = (event.target as HTMLInputElement).files[0];
 
     const reader = new FileReader();
-    reader.onload = (evt:any) => {
+    reader.onload = (evt: any) => {
 
-      let img = new Image;
-      img.onload = (evt0:any)=> {
+      const img = new Image;
+      img.onload = (evt0: any) => {
         if (img.width === 990 && img.height === 240){
           this.imageSrc = evt.target.result;
           this.images.push(file);
@@ -106,7 +106,7 @@ export class CommercialComponent implements OnInit {
       this.toastr.info('Баннер сохранен', 'Успех');
     }, error1 => {
       this.isDownloadImage = false;
-      this.toastr.error(error1.message, 'Error')
+      this.toastr.error(error1.message, 'Error');
     });
 
 
