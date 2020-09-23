@@ -10,7 +10,7 @@
             <div mat-line><b>Пол:</b> {{ currentChild.childSex === 'female' ? 'Ж' : 'М' }}</div>
           </mat-grid-tile>
           <mat-grid-tile>
-            <div mat-line><b>Дата рождения:</b> {{ currentChild.dateBirth | date: 'dd.MM.yyyy' }} ({{ childAgeWeeks }} нед.)</div>
+            <div mat-line><b>Дата рождения:</b> {{ currentChild.dateBirth | date: 'dd.MM.yyyy' }} ({{ childAgeWeeks }} нед., {{ childAgeMonth }} мес.)</div>
           </mat-grid-tile>
           <mat-grid-tile>
             <div mat-line><b>E-mail:</b> {{ currentChild.userEmail }}</div>
@@ -63,13 +63,13 @@
                 </div>
               </div>
             </div>
-            <button mat-button mat-raised-button [disabled]="!currentChild || !currentChild.childName || loading"
-                    (click)="search()" style="min-width: 107px">
-              <span *ngIf="!loading">
-                Применить
-              </span>
-              <mat-spinner *ngIf="loading" diameter="25" class="m-1"></mat-spinner>
-            </button>
+<!--            <button mat-button mat-raised-button [disabled]="!currentChild || !currentChild.childName || loading"-->
+<!--                    (click)="search()" style="min-width: 107px">-->
+<!--              <span *ngIf="!loading">-->
+<!--                Применить-->
+<!--              </span>-->
+<!--              <mat-spinner *ngIf="loading" diameter="25" class="m-1"></mat-spinner>-->
+<!--            </button>-->
           </div>
         </mat-card>
       </div>

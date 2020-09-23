@@ -23,6 +23,7 @@ export class SleepDurationComponent implements OnInit {
   interval: string;
   currentChild: Children;
   childAgeWeeks = 0;
+  childAgeMonth = 0;
   loading = false;
   width = 1600;
   minRotation = 0;
@@ -163,10 +164,16 @@ export class SleepDurationComponent implements OnInit {
     this.filter.endDay = now.getDate();
     this.filter.endMonth = now.getMonth() + 1;
     this.filter.endYear = now.getFullYear();
+    if (this.currentChild?.childId) {
+      this.search();
+    }
   }
 
   setDayPart(data) {
     this.filter.dayPart = data.value;
+    if (this.currentChild?.childId) {
+      this.search();
+    }
   }
 
   openDialog(): void {
@@ -277,6 +284,7 @@ export class SleepDurationComponent implements OnInit {
   setChild(child: Children) {
     this.currentChild = child;
     this.childAgeWeeks = moment(new Date()).diff(this.currentChild.dateBirth, 'weeks');
+    this.childAgeMonth = moment(new Date()).diff(this.currentChild.dateBirth, 'month');
   }
 
   getDatesBetweenDates(startDate: string, endDate: string, dateFormat = 'YYYY/MM/DD'): string[] {
@@ -308,6 +316,7 @@ export class SleepDurationComponent implements OnInit {
       response => {
         this.setChild(response);
         this.filter.childId = this.currentChild.childId;
+        this.search();
       },
       (error) => {
         this.toastr.error('Ребенка с таким идентификатором нет', 'Error');

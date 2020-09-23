@@ -82,6 +82,7 @@ export class WebinarsComponent extends GeneralTableView<WebinarResponse> impleme
         if (result.obj && !result.obj2) {
           this.items.forEach((item, key) => {
             if (item.webinarId === result.obj.id) {
+              result.obj.webinarId = result.obj.id;
               this.items[key] = result.obj;
             }
           });
