@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>
+  <p mat-dialog-title>{{dialogTitle}}</p>
+</h1>
+
+<div mat-dialog-content>
+  <mat-form-field class="width100">
+    <mat-label>Комментарий</mat-label>
+    <textarea
+      required
+      matInput
+      [(ngModel)]="comment"
+      name="comment"
+    >
+    </textarea>
+  </mat-form-field>
+</div>
+
+<!--  кнопки возможных действий-->
+<section>
+  <div>
+    <button
+      mat-raised-button color="primary"
+      (click)="confirm()"
+      class="pull-left"
+    >
+      <span *ngIf="!loading">Сохранить</span>
+      <mat-spinner *ngIf="loading" diameter="25" color="accent" class="m-x-a m-1"></mat-spinner>
+    </button>
+
+    <button
+      mat-raised-button
+      (click)="cancel()"
+      class="pull-right"
+    >
+      Отмена
+    </button>
+  </div>
+</section>

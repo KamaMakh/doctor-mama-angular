@@ -34,4 +34,11 @@ export class UserService implements UserDao {
   delete(id: number): Observable<UserResponseAfterUpdate> {
     return this.http.post<UserResponseAfterUpdate>(`/api/admin/user/${id}`, id);
   }
+
+  addComment(id: number, comment: string): Observable<UserResponseAfterUpdate> {
+    return this.http.post<UserResponseAfterUpdate>(`/api/admin/user/${id}/comment?comment=${comment}`, {
+      id,
+      comment
+    });
+  }
 }

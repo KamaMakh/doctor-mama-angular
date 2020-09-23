@@ -1,20 +1,24 @@
-.col-email {
-  width: 30% !important;
-}
+/*.col-email {*/
+/*  width: 20% !important;*/
+/*}*/
 
-.col-ownChildCount {
-  width: 20% !important;
-  text-align: center;
-}
+/*.col-ownChildCount {*/
+/*  width: 10% !important;*/
+/*  text-align: center;*/
+/*}*/
 
-.col-observedChildCount {
-  width: 20% !important;
-  text-align: center;
-}
+/*.col-observedChildCount {*/
+/*  width: 10% !important;*/
+/*  text-align: center;*/
+/*}*/
 
-.col-payments {
-  width: 20% !important;
-}
+/*.col-payments {*/
+/*  width: 10% !important;*/
+/*}*/
+
+/*.col-col-comment {*/
+/*  width: 20% !important;*/
+/*}*/
 
 
 .right-button {

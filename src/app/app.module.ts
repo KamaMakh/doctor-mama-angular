@@ -52,6 +52,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { WebinarsComponent } from './views/webinars/webinars.component';
 import { EditWebinarDialogComponent } from './dialog/edit-webinar-dialog/edit-webinar-dialog.component';
+import { AddUserCommentComponent } from './dialog/add-user-comment/add-user-comment.component';
 
 registerLocaleData(localeRu);
 
@@ -76,7 +77,8 @@ registerLocaleData(localeRu);
     DeleteUserDialogComponent,
     ChildrenComponent,
     WebinarsComponent,
-    EditWebinarDialogComponent
+    EditWebinarDialogComponent,
+    AddUserCommentComponent
   ],
     imports: [
         BrowserModule,

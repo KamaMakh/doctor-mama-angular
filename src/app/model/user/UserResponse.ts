@@ -8,6 +8,7 @@ export interface UserResponse {
   email: string;
   ownChildCount: number;
   observedChildCount: number;
+  adminComment?: string;
 }
 
 export interface UserResponseAfterUpdate {
@@ -15,6 +16,7 @@ export interface UserResponseAfterUpdate {
   email: string;
   enabled: boolean;
   phoneNumber?: string | null;
+  adminComment?: string;
 }
 
 export interface UserChangePasswordRequest {

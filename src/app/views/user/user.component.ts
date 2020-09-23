@@ -9,6 +9,7 @@ import {DialogAction} from '../../object/DialogResult';
 import {EditUserDialogComponent} from '../../dialog/edit-user-dialog/edit-user-dialog.component';
 import {DeleteUserDialogComponent} from '../../dialog/delete-user-dialog/delete-user-dialog.component';
 import {Router} from '@angular/router';
+import {AddUserCommentComponent} from '../../dialog/add-user-comment/add-user-comment.component';
 
 @Component({
   selector: 'app-user',
@@ -31,9 +32,9 @@ export class UserComponent extends GeneralTableView<UserResponse> implements OnI
     const currentUser = localStorage.getItem('currentUserDoctorMama') ? JSON.parse(localStorage.getItem('currentUserDoctorMama')) : '';
     const role = currentUser?.roles[0]?.role;
     if (role && role === 'consultant') {
-      this.displayedColumns = ['email', 'ownChildCount', 'observedChildCount', 'actions'];
+      this.displayedColumns = ['email', 'ownChildCount', 'observedChildCount', 'adminComment'];
     } else {
-      this.displayedColumns = ['email', 'ownChildCount', 'observedChildCount', 'payments', 'actions'];
+      this.displayedColumns = ['email', 'ownChildCount', 'observedChildCount', 'payments', 'adminComment', 'actions'];
     }
     if (!this.items) {
       this.pageSize = 25;
@@ -56,6 +57,33 @@ export class UserComponent extends GeneralTableView<UserResponse> implements OnI
         return;
       }
       if (result.action === DialogAction.OK) { // нажали сохранить (обрабатывает как добавление, так и удаление)
+        return;
+      }
+    });
+  }
+  openCommentDialog(user: UserResponse): void {
+    const dialogRef = this.dialog.open(AddUserCommentComponent, {
+      data: {
+        title: 'Добавить комментарий',
+        user
+      },
+      width: '600px',
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!(result)) { // если просто закрыли окно, ничего не нажав
+        return;
+      }
+      if (result.action === DialogAction.OK) { // нажали сохранить (обрабатывает как добавление, так и удаление)
+        if (result.obj) {
+          this.items.forEach((item, key) => {
+            if (Number(item.id) === Number(result.obj.id)) {
+              this.items[key] = result.obj;
+              this.assignTableSource();
+              return;
+            }
+          });
+        }
         return;
       }
     });

@@ -75,7 +75,7 @@
             <!-- Своих детей -->
             <ng-container matColumnDef="ownChildCount">
               <th mat-header-cell *matHeaderCellDef class="text-center">Своих детей</th>
-              <td class="col-ownChildCount paddings5lr" mat-cell *matCellDef="let item">
+              <td class="col-ownChildCount paddings5lr text-center" mat-cell *matCellDef="let item">
                 <button mat-raised-button style="background: #9c27b0; color: white;" (click)="openChildren(item)">
                   <mat-icon aria-hidden="false">remove_red_eye</mat-icon>
                   {{item.ownChildCount}}
@@ -86,17 +86,25 @@
             <!-- Детей с доступом -->
             <ng-container matColumnDef="observedChildCount">
               <th mat-header-cell *matHeaderCellDef class="text-center">Детей с доступом</th>
-              <td class="col-observedChildCount paddings5lr" mat-cell
+              <td class="col-observedChildCount paddings5lr text-center" mat-cell
                   *matCellDef="let item">{{item.observedChildCount}}</td>
             </ng-container>
 
             <!-- Оплаты -->
             <ng-container matColumnDef="payments">
-              <th mat-header-cell *matHeaderCellDef>Оплаты</th>
-              <td class="col-payments paddings5lr" mat-cell *matCellDef="let item">
+              <th mat-header-cell *matHeaderCellDef class="text-center">Оплаты</th>
+              <td class="col-payments paddings5lr text-center" mat-cell *matCellDef="let item">
                 <button mat-icon-button class="edit-icon">
                   <mat-icon aria-hidden="false">payments</mat-icon>
                 </button>
+              </td>
+            </ng-container>
+
+            <!-- Оплаты -->
+            <ng-container matColumnDef="adminComment">
+              <th mat-header-cell *matHeaderCellDef class="text-center">Комментарий</th>
+              <td class="col-comment paddings5lr text-center" mat-cell *matCellDef="let item">
+                {{ item.adminComment ? item.adminComment : '-' }}
               </td>
             </ng-container>
 
@@ -106,7 +114,10 @@
               <td class="col-actions paddings5lr" mat-cell *matCellDef="let item">
                 <div class="row justify-content-center">
                   <button mat-icon-button (click)="openEditDialog(item)" class="m-1">
-                    <mat-icon aria-hidden="false">edit</mat-icon>
+                    <mat-icon aria-hidden="false">vpn_key</mat-icon>
+                  </button>
+                  <button mat-icon-button (click)="openCommentDialog(item)" class="m-1">
+                    <mat-icon aria-hidden="false">comment</mat-icon>
                   </button>
                   <button mat-icon-button color="warn" (click)="openDeleteDialog(item)" aria-label="m-1">
                     <mat-icon>delete</mat-icon>
