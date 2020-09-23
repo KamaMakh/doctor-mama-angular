@@ -1,0 +1,78 @@
+<div class="main-panel">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+    <div class="container-fluid">
+      <div class="navbar-wrapper">
+        <a class="navbar-brand">Консультанты</a>
+      </div>
+    </div>
+    <div>
+      <button class="right-button btn btn-primary"
+              mat-raised-button color="primary"
+              (click)="openCreateDialog()"
+      >
+        <mat-icon class="button-add">add</mat-icon>
+        Консультанта
+      </button>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+
+  <div class="content">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-header card-header-warning">
+          <h4 class="card-title">Мои клиенты</h4>
+          <p class="card-category">Всего: {{totalElements}}</p>
+        </div>
+        <div *ngIf="items && (items.length > 0)">
+          <table mat-table [dataSource]="dataSource" matSort class="table">
+            <!-- ID -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td class="col-email paddings5lr" mat-cell *matCellDef="let item">{{item.id}}</td>
+            </ng-container>
+
+            <!-- Email -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>E-mail</th>
+              <td class="col-email paddings5lr" mat-cell *matCellDef="let item">{{item.email}}</td>
+            </ng-container>
+
+            <!-- Действия -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef class="text-center">Действия</th>
+              <td class="col-actions paddings5lr" mat-cell *matCellDef="let item">
+                <div class="row justify-content-center">
+                  <button mat-icon-button color="warn" (click)="openDeleteDialog(item)" aria-label="m-1">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- какие поля отображать -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; "></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          </table>
+
+          <mat-paginator
+            (page)="pageChanged($event)"
+            [pageIndex]="pageNumber"
+            [pageSize]="pageSize"
+            [length]="totalElements"
+            [pageSizeOptions]="[25]"
+            showFirstLastButtons>
+          </mat-paginator>
+        </div>
+
+        <div class="item-not-found col-md-12 col-lg-12 col-sm-12 col-xs-12" *ngIf="items && items.length === 0">
+          Клиенты не найдены
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>

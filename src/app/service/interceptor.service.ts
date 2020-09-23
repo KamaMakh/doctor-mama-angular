@@ -26,7 +26,7 @@ export class InterceptorService implements HttpInterceptor {
         this.currentUser = localStorage.getItem('currentUserDoctorMama') ? JSON.parse(localStorage.getItem('currentUserDoctorMama')) : '';
         this.role = this.currentUser?.roles[0]?.role;
         if (this.role === 'admin') {
-          this.enabledURLs = ['users', 'commercial', 'webinars', 'children'];
+          this.enabledURLs = ['users', 'commercial', 'webinars', 'children', 'consultants'];
         } else {
           this.enabledURLs = ['users', 'children', 'charts'];
         }

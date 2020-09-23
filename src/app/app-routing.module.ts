@@ -12,6 +12,7 @@ import {SleepDurationComponent} from './views/sleep-duration/sleep-duration.comp
 import {CommercialComponent} from './views/commercial/commercial.component';
 import {ChildrenComponent} from './views/children/children.component';
 import {WebinarsComponent} from './views/webinars/webinars.component';
+import {ConsultantComponent} from './views/consultant/consultant.component';
 
 const directoriesRoutes: Routes = [
   {
@@ -67,6 +68,10 @@ const routes: Routes = [
       {
         path: 'webinars',
         component: WebinarsComponent
+      },
+      {
+        path: 'consultants',
+        component: ConsultantComponent
       },
       {path: '', redirectTo: '/users', pathMatch: 'full'},
       ...directoriesRoutes,

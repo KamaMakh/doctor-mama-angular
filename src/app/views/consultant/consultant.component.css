@@ -1,0 +1,24 @@
+.right-button {
+  align-content: flex-end;
+  margin-right: 15px;
+}
+
+
+.paddings5lr {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.button-add {
+  margin-top: -10px; margin-left: -10px;
+}
+
+.item-not-found {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.col-actions {
+  text-align: center;
+}

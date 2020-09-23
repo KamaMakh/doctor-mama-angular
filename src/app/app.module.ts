@@ -53,6 +53,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { WebinarsComponent } from './views/webinars/webinars.component';
 import { EditWebinarDialogComponent } from './dialog/edit-webinar-dialog/edit-webinar-dialog.component';
 import { AddUserCommentComponent } from './dialog/add-user-comment/add-user-comment.component';
+import { ConsultantComponent } from './views/consultant/consultant.component';
+import { AddConsultantDialogComponent } from './dialog/consultant/add-consultant-dialog/add-consultant-dialog.component';
+import { DeleteConsultantDialogComponent } from './dialog/consultant/delete-consultant-dialog/delete-consultant-dialog.component';
 
 registerLocaleData(localeRu);
 
@@ -78,7 +81,10 @@ registerLocaleData(localeRu);
     ChildrenComponent,
     WebinarsComponent,
     EditWebinarDialogComponent,
-    AddUserCommentComponent
+    AddUserCommentComponent,
+    ConsultantComponent,
+    AddConsultantDialogComponent,
+    DeleteConsultantDialogComponent
   ],
     imports: [
         BrowserModule,

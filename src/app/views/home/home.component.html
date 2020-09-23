@@ -17,6 +17,13 @@
             <p>Мои клиенты</p>
           </a>
         </li>
+        <li *ngIf="role === 'admin'" class="nav-item" routerLinkActive="active">
+          <a class="nav-link pointer"
+             routerLink="/consultants">
+            <!--            <i class="material-icons">fastfood</i>-->
+            <p>Консультанты</p>
+          </a>
+        </li>
 
 <!--        <li class="nav-item" routerLinkActive="active">-->
 <!--          <a class="nav-link pointer"-->

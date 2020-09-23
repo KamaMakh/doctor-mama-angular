@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>
+  <p mat-dialog-title>Удалить консультанта {{consultant.email}}?</p>
+</h1>
+
+<!--  кнопки возможных действий-->
+<section>
+  <div>
+    <button
+      mat-raised-button color="primary"
+      (click)="confirm()"
+      class="pull-left"
+    >
+      <span *ngIf="!loading">Удалить</span>
+      <mat-spinner *ngIf="loading" diameter="25" color="accent" class="m-x-a m-1"></mat-spinner>
+    </button>
+
+    <button
+      mat-raised-button
+      (click)="cancel()"
+      class="pull-right"
+    >
+      Отмена
+    </button>
+  </div>
+</section>
