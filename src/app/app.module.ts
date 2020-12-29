@@ -56,6 +56,8 @@ import { AddUserCommentComponent } from './dialog/add-user-comment/add-user-comm
 import { ConsultantComponent } from './views/consultant/consultant.component';
 import { AddConsultantDialogComponent } from './dialog/consultant/add-consultant-dialog/add-consultant-dialog.component';
 import { DeleteConsultantDialogComponent } from './dialog/consultant/delete-consultant-dialog/delete-consultant-dialog.component';
+import { ContractsComponent } from './views/contracts/contracts.component';
+import { ContractDetailComponent } from './views/contracts/contract-detail/contract-detail.component';
 
 registerLocaleData(localeRu);
 
@@ -84,7 +86,9 @@ registerLocaleData(localeRu);
     AddUserCommentComponent,
     ConsultantComponent,
     AddConsultantDialogComponent,
-    DeleteConsultantDialogComponent
+    DeleteConsultantDialogComponent,
+    ContractsComponent,
+    ContractDetailComponent
   ],
     imports: [
         BrowserModule,

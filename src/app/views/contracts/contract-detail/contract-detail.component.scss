@@ -1,0 +1,27 @@
+.contract-actions {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  &__back {
+    background: #9c27b0;
+    color: #fff;
+    margin: 5px;
+  }
+  &__edit {
+    background: linear-gradient(60deg, #ffa726, #fb8c00);
+    color: #fff;
+    margin: 5px;
+  }
+}
+.comm-title {
+  margin: 20px;
+  font-weight: bold;
+  font-size: 14px;
+}
+.comm-buttons {
+  display: flex;
+  align-items: center;
+  &--btn {
+    margin: 10px;
+  }
+}

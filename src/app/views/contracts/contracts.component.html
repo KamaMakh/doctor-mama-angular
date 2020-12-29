@@ -1,0 +1,86 @@
+<div class="main-panel">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+    <div class="container-fluid">
+      <div class="navbar-wrapper">
+        <a class="navbar-brand">Контракты</a>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+  <div class="content">
+
+    <div class="container-fluid">
+
+      <div class="card">
+        <div class="card-header card-header-warning">
+          <h4 class="card-title">Мои контракты</h4>
+
+          <p class="card-category">Всего: {{totalElements}}</p>
+        </div>
+
+        <div *ngIf="items && (items.length > 0)">
+
+          <table mat-table [dataSource]="dataSource" matSort class="table">
+
+            <!-- Email -->
+            <ng-container matColumnDef="userEmail">
+              <th mat-header-cell *matHeaderCellDef>Пользователь</th>
+              <td class="col-email paddings5lr" mat-cell *matCellDef="let item">{{item.userEmail}}</td>
+            </ng-container>
+
+            <!-- childName -->
+            <ng-container matColumnDef="childName">
+              <th mat-header-cell *matHeaderCellDef>Ребенок</th>
+              <td class="col-email paddings5lr" mat-cell *matCellDef="let item">{{item.childName}}</td>
+            </ng-container>
+
+            <!-- childName -->
+            <ng-container matColumnDef="contractType">
+              <th mat-header-cell *matHeaderCellDef>Вид услуги</th>
+              <td class="col-email paddings5lr" mat-cell *matCellDef="let item">{{item.contractType}}</td>
+            </ng-container>
+
+            <!-- childName -->
+            <ng-container matColumnDef="consultantId">
+              <th mat-header-cell *matHeaderCellDef>Консультант</th>
+              <td class="col-email paddings5lr" mat-cell *matCellDef="let item">{{item.consultantId}}</td>
+            </ng-container>
+
+            <!-- childName -->
+            <ng-container matColumnDef="contractDate">
+              <th mat-header-cell *matHeaderCellDef>Дата создания</th>
+              <td class="col-email paddings5lr" mat-cell *matCellDef="let item">{{item.contractDate | date: 'yyy-MM-dd H:m'}}</td>
+            </ng-container>
+
+            <!-- childName -->
+            <ng-container matColumnDef="contractStatus">
+              <th mat-header-cell *matHeaderCellDef>Статус</th>
+              <td class="col-email paddings5lr" mat-cell *matCellDef="let item">{{statuses[item.contractStatus]}}</td>
+            </ng-container>
+
+            <!-- какие поля отображать -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; "></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openContract(row)" class="contract-row"></tr>
+
+          </table>
+
+          <mat-paginator
+            (page)="pageChanged($event)"
+            [pageIndex]="pageNumber"
+            [pageSize]="pageSize"
+            [length]="totalElements"
+            [pageSizeOptions]="[25]"
+            showFirstLastButtons>
+          </mat-paginator>
+        </div>
+
+        <div class="item-not-found col-md-12 col-lg-12 col-sm-12 col-xs-12" *ngIf="items && items.length === 0">
+          Клиенты не найдены
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>

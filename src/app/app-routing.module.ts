@@ -13,6 +13,19 @@ import {CommercialComponent} from './views/commercial/commercial.component';
 import {ChildrenComponent} from './views/children/children.component';
 import {WebinarsComponent} from './views/webinars/webinars.component';
 import {ConsultantComponent} from './views/consultant/consultant.component';
+import {ContractsComponent} from './views/contracts/contracts.component';
+import {ContractDetailComponent} from './views/contracts/contract-detail/contract-detail.component';
+
+const contractRoutes: Routes = [
+  {
+    path: 'contracts',
+    component: ContractsComponent
+  },
+  {
+    path: 'contracts/:id',
+    component: ContractDetailComponent
+  }
+];
 
 const directoriesRoutes: Routes = [
   {
@@ -76,7 +89,8 @@ const routes: Routes = [
       {path: '', redirectTo: '/users', pathMatch: 'full'},
       ...directoriesRoutes,
       ...usersRoutes,
-      ...chartsRoutes
+      ...chartsRoutes,
+      ...contractRoutes
     ]
   },
   {

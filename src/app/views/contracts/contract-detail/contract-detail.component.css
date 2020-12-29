@@ -1,0 +1,31 @@
+.contract-actions {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.contract-actions__back {
+  background: #9c27b0;
+  color: #fff;
+  margin: 5px;
+}
+.contract-actions__edit {
+  background: linear-gradient(60deg, #ffa726, #fb8c00);
+  color: #fff;
+  margin: 5px;
+}
+
+.comm-title {
+  margin: 20px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.comm-buttons {
+  display: flex;
+  align-items: center;
+}
+.comm-buttons--btn {
+  margin: 10px;
+}
+
+/*# sourceMappingURL=contract-detail.component.css.map */

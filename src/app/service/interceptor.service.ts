@@ -28,7 +28,7 @@ export class InterceptorService implements HttpInterceptor {
         if (this.role === 'admin') {
           this.enabledURLs = ['users', 'commercial', 'webinars', 'children', 'consultants'];
         } else {
-          this.enabledURLs = ['users', 'children', 'charts'];
+          this.enabledURLs = ['users', 'children', 'charts', 'contracts'];
         }
         let enableURL = false;
         this.enabledURLs.forEach(url => {

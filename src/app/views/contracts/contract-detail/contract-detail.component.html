@@ -1,0 +1,150 @@
+<div class="main-panel">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+    <div class="container-fluid">
+      <div class="navbar-wrapper">
+        <a class="navbar-brand">Контракт №{{contractID}}</a>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+  <div class="content">
+
+    <div class="container-fluid">
+      <mat-spinner *ngIf="loading" diameter="30" class="m-x-a m-t-15"></mat-spinner>
+      <div *ngIf="!loading" class="card">
+        <div class="card-header card-header-warning">
+          <h4 class="card-title">Контракт №{{contractID}}</h4>
+        </div>
+        <div class="row white-box" style="margin: 10px;">
+
+          <div class="col-12">
+            <mat-form-field class="width100">
+              <mat-label>Пользователь</mat-label>
+              <input [readonly]="true"
+                     matInput
+                     [(ngModel)]="contract.userEmail">
+            </mat-form-field>
+          </div>
+
+          <div class="col-12">
+            <mat-form-field class="width100">
+              <mat-label>Ребенок</mat-label>
+              <input [readonly]="true"
+                     matInput
+                     [(ngModel)]="contract.childName">
+            </mat-form-field>
+          </div>
+
+          <div class="col-12">
+            <mat-form-field class="width100">
+              <mat-label>Вид услуги</mat-label>
+              <input [readonly]="true"
+                     matInput
+                     [(ngModel)]="contract.contractType">
+            </mat-form-field>
+          </div>
+
+          <div class="col-12">
+            <mat-form-field class="width100">
+              <mat-label>Консультант</mat-label>
+              <input [readonly]="true"
+                     matInput
+                     [(ngModel)]="contract.consultantId">
+            </mat-form-field>
+          </div>
+
+          <div class="col-12">
+            <mat-form-field class="width100">
+              <mat-label>Дата создания</mat-label>
+              <input [readonly]="true"
+                     matInput
+                     [value]="contract.contractDate | date: 'yyy-MM-dd H:m'">
+            </mat-form-field>
+          </div>
+
+          <div class="col-12">
+            <mat-form-field class="width100">
+              <mat-label>Статус</mat-label>
+              <input [readonly]="true"
+                     matInput
+                     [(ngModel)]="statuses[contract.contractStatus]">
+            </mat-form-field>
+          </div>
+
+          <div class="col-12">
+            <mat-form-field class="width100">
+              <mat-label>Контактный номер телефона</mat-label>
+              <input [readonly]="true"
+                     matInput
+                     [(ngModel)]="contract.preferredCommunicationMethod.phoneNumber">
+            </mat-form-field>
+          </div>
+
+          <div class="col-12">
+            <mat-form-field class="width100">
+              <mat-label>Контактный e-mail</mat-label>
+              <input [readonly]="true"
+                     matInput
+                     [(ngModel)]="contract.preferredCommunicationMethod.contactEmail">
+            </mat-form-field>
+          </div>
+
+          <div class="comm-title">Предпочитаемый способ связи:</div>
+          <div class="col-12">
+            <div class="comm-buttons">
+              <div *ngIf="contract.preferredCommunicationMethod.hasTelegram" class="comm-buttons--btn">
+                <button mat-raised-button size="mini" style="background: #0088CC; color: white" readonly="true">
+                  {{ communications.hasTelegram }}
+                </button>
+              </div>
+              <div *ngIf="contract.preferredCommunicationMethod.hasWhatsapp" class="comm-buttons--btn">
+                <button mat-raised-button size="mini" style="background: #075E54; color: white" readonly="true">
+                  {{ communications.hasWhatsapp }}
+                </button>
+              </div>
+              <div *ngIf="contract.preferredCommunicationMethod.hasViber" class="comm-buttons--btn">
+                <button mat-raised-button size="mini" style="background: #59267c; color: white" readonly="true">
+                  {{ communications.hasViber }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contract-actions">
+          <button
+            class="contract-actions__back"
+            mat-raised-button
+            (click)="goTo('/contracts')"
+          >
+            Назад
+          </button>
+          <button
+            *ngIf="contract.contractStatus === 'new'"
+            class="contract-actions__edit"
+            mat-raised-button
+            (click)="openDialog('in_work')"
+          >
+            Взять в работу
+          </button>
+          <button
+            *ngIf="contract.contractStatus === 'in_work'"
+            class="contract-actions__edit"
+            mat-raised-button
+            (click)="openDialog('completed')"
+          >
+            Завершить
+          </button>
+          <button
+            *ngIf="contract.contractStatus === 'completed'"
+            class="contract-actions__edit"
+            mat-raised-button
+            disabled
+          >
+            Завершен
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
